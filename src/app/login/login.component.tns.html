@@ -1,0 +1,55 @@
+<DockLayout class="parent" stretchLastChild="true">
+    <DockLayout dock="top" class="parent2" stretchLastChild="true">
+        <StackLayout class="centerClass">
+            <StackLayout visibility="{{ hasLoggedIn() ? 'collapsed' : 'visible' }}" class="loggedIn">
+                <Label text="You are logged in!" class="loggedLbl"></Label>
+                <Button text="Logout" (tap)="logout()"></Button>
+            </StackLayout>
+            <GridLayout rows="auto, auto, auto, auto, auto" columns="auto, *, auto"
+                visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" class="mobileForm">
+                <Label row="0" col="0" text="Username:"></Label>
+                <TextField row="1" col="0" colSpan="3" #username hint="Enter Username" class="input" autocorrect="false"
+                    autocapitalizationType="none"></TextField>
+                <Label row="2" col="0" text="Password:"></Label>
+                <TextField row="3" col="0" colSpan="3" #password hint="Enter Password" class="input" secure="true"
+                    autocorrect="false" autocapitalizationType="none">
+                </TextField>
+                <Button row="4" col="0" class="forgotPassword" text="Forgot Password?" (tap)="sendResetEmail()"
+                    [nsRouterLink]="['/passwordResetRequest']"></Button>
+                <Label row="4" col="1" visibility="{{ isLoggedIn() ? 'collapsed' : 'visible' }}"
+                    text="Please check Login Info" textWrap="true"></Label>
+                <Button row="4" col="2" text="Enter" (tap)="onSubmit(password.text, username.text)"></Button>
+            </GridLayout>
+        </StackLayout>
+    </DockLayout>
+</DockLayout>
+
+
+
+<!-- Original Web template:
+
+<div class="outer">
+    <div class="parent">
+        <form [hidden]="isNotLoggedIn()" #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+            <div>
+                <label>Username:</label><br>
+                <input type="text" name="Username" ngModel>
+            </div>
+            <div>
+                <label>Password:</label><br>
+                <input type="password" name="Password" ngModel>
+            </div>
+            <div>
+                <input id="submitButton" type="submit" name="Enter">
+            </div>
+        </form>
+        <label [hidden]="isLoggedIn()">Please check Login Info</label>
+        <div [hidden]="hasLoggedIn()">
+            <label>You are logged in!</label><br>
+            <button (click)="logout()">Logout</button>
+        </div>
+    </div>
+    <div class="buttonAlignment">
+        <button (click)="sendResetEmail()">Forgot Password?</button>
+    </div>
+</div> -->

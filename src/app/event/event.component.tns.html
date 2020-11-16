@@ -1,0 +1,68 @@
+<DockLayout class="parent" stretchLastChild="true">
+    <StackLayout dock="top" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" class="topBar">
+        <Button visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" (tap)="addRoom()"
+            text="Add New Room &#8250;"></Button>
+    </StackLayout>
+    <ScrollView class="ScrollView">
+        <StackLayout dock="top" class="mainStackLayout" *ngIf="!isLoading()" stretchLastChild="true">
+            <GridLayout rows="auto, auto, auto, auto" columns="*, *,auto" class="roomEventList"
+                *ngFor="let room of rooms; let indexOfRoom = index">
+                <Button row="0" col="0" colSpan="2" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}"
+                    text="Save Room"
+                    (tap)="saveRoom(room._id, nameText.text, numberText.text, room.events, indexOfRoom, $event)"></Button>
+                <Button row="0" col="2" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" text="{{delRoom}}"
+                    (tap)="deleteRoom(room._id)"></Button>
+                <Label class="lbl centerLbl" row="1" col="0" text="{{ room.name }}"
+                    visibility="{{ isNotLoggedIn() ? 'visible' : 'collapsed' }}"></Label>
+                <Label class="lbl centerLbl" row="1" col="1" text="{{ room.number }}"
+                    visibility="{{ isNotLoggedIn() ? 'visible' : 'collapsed' }}"></Label>
+                <TextField row="1" col="0" colSpan="2" #nameText class="room" hint="Room Name" autocorrect="true"
+                    visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" text="{{ room.name }}"></TextField>
+                <TextField row="1" col="2" #numberText class="roomNumber" hint="Room Number" autocorrect="true"
+                    visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" text="{{ room.number }}"></TextField>
+                <GridLayout row="2" col="0" colSpan="3" rows="auto, *" columns="*, auto" class="eventListArea">
+                    <Label *ngIf="!noEvents(indexOfRoom)" row="0" col="0" class="eventLbl" text="Events:"></Label>
+                    <Button row="0" col="1" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}"
+                        text="Add Event" (tap)="addEvent(room._id, nameText.text, numberText.text, room.events)"></Button>
+                    <DockLayout row="1" col="0" colSpan="2">
+                        <GridLayout class="eventArea" rows="auto" columns="*,auto" dock="top"
+                            *ngFor="let event of room.events; let indexOfEvent = index">
+                            <Label class="lbl" row="0" col="0" text="-{{ event }}" textWrap="true"
+                                visibility="{{ isNotLoggedIn() ? 'visible' : 'collapsed' }}"></Label>
+                            <TextView row="0" col="0" id="room{{indexOfRoom}}event{{indexOfEvent}}"
+                                editable="{{ isNotLoggedIn() ? 'false' : 'true' }}" class="eventView" hint="Event" autocorrect="true"
+                                text="{{ event }}" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}"></TextView>
+                            <Button row="0" col="1" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}"
+                                text="{{ delEvent }}"
+                                (tap)="deleteEvent(room._id, nameText.text, numberText.text, room.events, event)"></Button>
+                        </GridLayout>
+                    </DockLayout>
+                </GridLayout>
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+</DockLayout>
+
+<!--
+Original Web template:
+
+<div class="parent">
+    <div [hidden]="isNotLoggedIn()" (click)="addRoom()" class="topBar">Button [hidden]="isNotLoggedIn()">Add New RooButton>Button [hidden]="isNotLoggedIn()">&#825Button>
+    </div>
+    
+    <div class="roomEventList" *ngFor="let room of rooms; let indexOfRoom = index">Button [hidden]="isNotLoggedIn()" (click)="deleteRoom(room._id)">deleButton>Button  [hidden]="isNotLoggedIn()" (click)="saveRoom(room._id, nameText.value, numberText.value, room.events, indexOfRoom)">Save RoButton>
+        <div class="roomTopBar">
+            <textarea #nameText [readonly]="isNotLoggedIn()" class="room">{{ room.name }}</textarea>
+            <textarea #numberText [readonly]="isNotLoggedIn()" class="roomNumber">{{ room.number }}</textarea>
+        </div>
+        <div class="eventList">
+Button id="title">EventButton>
+Button [hidden]="isNotLoggedIn()" (click)="addEvent(room._id, nameText.value, numberText.value, room.events)">Add EveButton>
+            <div *ngFor="let event of room.events; let indexOfEvent = index">
+                <textarea id="room{{indexOfRoom}}event{{indexOfEvent}}" [readonly]="isNotLoggedIn()">{{ event }}</textarea>
+    Button [hidden]="isNotLoggedIn()" (click)="deleteEvent(room._id, nameText.value, numberText.value, room.events, event)">deleButton>
+            </div>
+        </div>
+    </div>
+</div>
+-->

@@ -1,0 +1,125 @@
+/*
+Add your NativeScript specific styles here.
+To learn more about styling in NativeScript see:
+https://docs.nativescript.org/angular/ui/styling
+*/
+
+.parent {
+    background-color: rgb(242, 2, 138);
+    /* border-color: rgb(189, 189, 189); */
+    border-radius: 17;
+}
+
+.topBar {
+    background-color: rgb(223, 223, 223);
+    border-radius: 15;
+    margin-top: 5;
+    margin-bottom: 5;
+    margin-left: 5;
+    margin-right: 5;
+}
+
+Button {
+    border-radius: 15;
+    height: 34;
+    border-color: rgb(235, 177, 197);
+    border-width: 1;
+}
+
+.ScrollView {
+    background-color: rgb(255, 255, 255);
+    border-radius: 15;
+    margin-top: 5;
+    margin-bottom: 5;
+    margin-left: 5;
+    margin-right: 5;
+}
+
+.roomEventList {
+    background-color: rgb(255, 202, 220);
+    /* border-color: rgb(235, 192, 207);
+    border-width: 1; */
+    height: auto;
+    border-radius: 15;
+    margin-top: 5;
+    margin-bottom: 5;
+    margin-left: 5;
+    margin-right: 5;
+}
+
+/* TextField + TextView {
+    background-color: grey;
+    border-radius: 17;
+} */
+
+.eventLbl{
+    margin-top: 3;
+    margin-bottom: 3;
+    margin-left: 5;
+    margin-right: 5;
+}
+
+.eventListArea {
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(235, 177, 197);
+    border-radius: 15;
+    margin-top: 5;
+    margin-bottom: 5;
+    margin-left: 5;
+    margin-right: 5;
+}
+
+.room, .roomNumber, .eventView{
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(235, 177, 197);
+    border-width: 1;
+    border-radius: 15;
+    margin-top: 5;
+    margin-bottom: 5;
+}
+
+.room, .roomNumber{
+    text-align: center;
+}
+
+.eventView{
+    padding-left: 7;
+    padding-right: 7;
+}
+
+TextView {
+    height: auto;
+}
+
+.lbl {
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(235, 177, 197);
+    border-width: 1;
+    border-radius: 15;
+    margin-top: 5;
+    margin-bottom: 5;
+    margin-left: 5;
+    margin-right: 5;
+    padding-top: 3;
+    padding-bottom: 3;
+    padding-left: 7;
+    padding-right: 7;
+}
+
+.centerLbl {
+    text-align: center;
+}
+
+
+/* .mainStackLayout *{
+    border-color: grey;
+    border-radius: 15;
+    margin-top: 5;
+    margin-bottom: 5;
+    margin-left: 5;
+    margin-right: 5;
+    padding-top: 5;
+    padding-bottom: 5;
+    padding-left: 5;
+    padding-right: 5;
+} */

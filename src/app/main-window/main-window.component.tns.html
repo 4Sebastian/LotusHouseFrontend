@@ -1,0 +1,84 @@
+<DockLayout class="parent" stretchLastChild="true">
+
+
+    <DockLayout dock="top" class="topBar">
+        <Label dock="top" class="toggle-lbl" text="Ethan Project"></Label>
+    </DockLayout>
+    <!-- <GridLayout dock="top" columns="auto,*,auto" class="topBarContent">
+        <Button col="0" text="<<<<" (tap)="previousDate()"></Button>
+        <Label col="1" text="{{month}}:{{date}}:{{year}}" class="dateLbl"></Label>
+        <Button col="2" text=">>>>" (tap)="nextDate()"></Button>
+    </GridLayout> -->
+    <GridLayout dock="top" class="toggle" columns="*,auto,*" (loaded)="onTopBarLoaded($event)">
+        <Label id="togglerTop" class="togglerTop"></Label>
+
+        <Label col="0" text="<<<" class="toggle-lbl text-center" (tap)="previousDate()"></Label>
+
+        <Label col="1" text="Viewing: {{month}}/{{date}}/{{year}}" class="toggle-lbl text-center"></Label>
+
+        <Label col="2" text=">>>" class="toggle-lbl text-center" (tap)="nextDate()"></Label>
+    </GridLayout>
+
+    <GridLayout dock="bottom" class="toggle" columns="*,*,*" (loaded)="onToggleLoaded($event)">
+        <Label id="toggler" class="toggler"></Label>
+
+        <Label [nsRouterLink]="['/']" col="0" text="Home" class="toggle-lbl text-center"></Label>
+
+        <Label [nsRouterLink]="['/event']" col="1" text="Events" class="toggle-lbl text-center"></Label>
+
+        <!-- <Label [nsRouterLink]="['/calender']" col="2" text="Date" class="toggle-lbl text-center"></Label> -->
+
+        <Label [nsRouterLink]="['/login']" col="2" text="Login" class="toggle-lbl text-center"></Label>
+    </GridLayout>
+
+
+    <GridLayout rows="*" columns="*" dock="top" class="body">
+        <StackLayout class="activityIndicator" row="0" col="0" *ngIf="isLoading()">
+            <ActivityIndicator busy="true"></ActivityIndicator>
+        </StackLayout>
+
+        <router-outlet row="0" col="0"></router-outlet>
+    </GridLayout>
+
+
+    <!-- <FlexboxLayout class="bottomBar">
+        <Button [nsRouterLink]="['/']" pageTransition="slide" text="Home"></Button>
+        <Button [nsRouterLink]="['/event']" pageTransition="slide" text="Event"></Button>
+        <Button [nsRouterLink]="['/login']" pageTransition="slide" text="Login"></Button>
+    </FlexboxLayout> -->
+    
+
+</DockLayout>
+
+
+
+
+<!--
+Original Web template:
+
+<div class="parent">
+    <header>
+        <div class="topBar">
+            <div class="topBarContent">
+                <label>Ethan Project</label>
+            </div>
+        </div>            
+    </header>
+    
+    <div class="body">
+        <div class="bodyContent">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <footer>
+        <div class="bottomBar">
+            <div class="bottomBarContent">
+                <button routerLink="/">Home</button>
+                <button routerLink="/event">Event</button>
+                <button routerLink="/login">Login</button>
+            </div>
+        </div>    
+    </footer>
+</div>
+-->

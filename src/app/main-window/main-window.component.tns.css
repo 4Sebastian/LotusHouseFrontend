@@ -1,0 +1,100 @@
+/*
+Add your NativeScript specific styles here.
+To learn more about styling in NativeScript see:
+https://docs.nativescript.org/angular/ui/styling
+*/
+
+
+Button.-primary {
+    font-size: 18;
+}
+
+.topBar{
+    width: 100vw;
+    text-align: center;
+    /* margin-top: 25; */
+}
+
+.topBarContent {
+    /* width: 100vw; */
+    height: 34;
+    /* border-color: darkgrey; */
+    border-radius: 15;
+}
+
+.dateLbl {
+    text-align: center;
+}
+
+.parent {
+    background-color: rgb(255, 255, 255);
+    /* border-color: black; */
+    margin-top: 5;
+}
+
+.toggle {
+    align-self: baseline;
+    background-color: rgb(242, 92, 144);
+    vertical-align: middle;
+    /* border-width: 1; */
+    /* border-color: rgb(255, 82, 180); */
+    height: 34;
+    margin-left: 10;
+    margin-right: 10;
+    margin-bottom: 10;
+    border-radius: 100;
+}
+
+.toggler {
+    /* rgb(242, 2, 138) */
+    background-color: rgb(242, 2, 138);
+    /* border-width: 1;
+    border-color: rgb(255, 82, 180); */
+    height: 24;
+    margin-left: 5;
+    margin-right: 5;
+    border-radius: 100;
+}
+
+.togglerTop {
+    opacity: 0;
+    background-color: rgb(242, 2, 138);
+    /* border-width: 1;
+    border-color: rgb(255, 82, 180); */
+    height: 24;
+    margin-left: 1;
+    margin-right: 1;
+    border-radius: 100;
+}
+
+Label {
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+.toggle-lbl {
+    
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.body {
+    margin-top: 10;
+    margin-left: 10;
+    margin-right: 10;
+    margin-bottom: 10;
+}
+
+.activityIndicator {
+    vertical-align: middle;
+}
+
+
+
+
+
+Button {
+    border-radius: 15;
+    height: 34;
+}

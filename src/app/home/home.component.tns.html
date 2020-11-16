@@ -1,0 +1,47 @@
+<DockLayout class="parent" stretchLastChild="true">
+    <StackLayout dock="top" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" class="topBar">
+        <Button visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" (tap)="addEvent()" text="Add New Event &#8250;"></Button>
+    </StackLayout>
+    <ScrollView>
+        <StackLayout *ngIf="!isLoading()" class="homeGroup">
+            <GridLayout rows="auto, auto, auto" columns="*, *, auto" class="post" *ngFor="let event of events">
+                <Button row="0" col="2" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" text="Delete" (tap)="deleteEvent(event._id)"></Button>
+                <Button row="0" col="0" colSpan="2" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" text="Save Post" (tap)="savePost(event._id, titleText.text, dateText.text, descriptionText.text)"></Button>
+                    <Label row="1" col="0" text="{{ event.title }}" class="lbl" visibility="{{ isNotLoggedIn() ? 'visible' : 'collapsed' }}"></Label>
+                    <TextField row="1" col="0" colSpan="2" #titleText visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" class="writtenResponse text-center" hint="Event Title" autocorrect="true" text="{{event.title}}"></TextField>
+
+                    <Label row="1" col="1" text="{{ event.date }}" class="lbl" visibility="{{ isNotLoggedIn() ? 'visible' : 'collapsed' }}"></Label>
+                    <TextField row="1" col="2" #dateText visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" class="writtenResponse text-center" hint="Event Date" autocorrect="true" text="{{event.date}}"></TextField>
+                    <GridLayout row="2" col="0" colSpan="3" rows="auto, auto" columns="*" class="descriptionArea">
+                        <Label row="0" col="0" text="Description:" class="descriptionLbl" ></Label>
+                        
+                        <Label row="1" col="0" text="{{ event.description }}" class="descriptionLbl2" textWrap="true" visibility="{{ isNotLoggedIn() ? 'visible' : 'collapsed' }}"></Label>
+                        <TextView row="1" col="0" colSpan="3" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" #descriptionText class="writtenResponse" hint="Event Description" autocorrect="true" text="{{event.description}}"></TextView>
+                    </GridLayout>
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+</DockLayout>
+
+<!--
+Original Web template:
+
+<div class="parent">
+    
+    <div [hidden]="isNotLoggedIn()" (click)="addEvent()" class="ttopBar">
+        <Label [hidden]="isNotLoggedIn()">Add New Event:</Label>
+        <Label [hidden]="isNotLoggedIn()">&#8250;</Label>
+    </div>
+    <div class="post" *ngFor="let event of events">
+        <button [hidden]="isNotLoggedIn()" (click)="deleteEvent(event._id)">delete</button>
+        <button  [hidden]="isNotLoggedIn()" (click)="savePost(event._id, titleText.value, dateText.value, descriptionText.value)">Save Post</button>
+        <div class="topBar">
+            <textarea #titleText [readonly]="isNotLoggedIn()" class="title">{{ event.title }}</textarea>
+            <textarea #dateText [readonly]="isNotLoggedIn()" class="dateIn">{{ event.date }}</textarea>
+        </div>
+        <div class="bottomBar">
+            <textarea #descriptionText [readonly]="isNotLoggedIn()" class="description">Description: {{ event.description }}</textarea>
+        </div>
+    </div>
+</div>
+-->
