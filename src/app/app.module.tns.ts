@@ -15,6 +15,7 @@ import { PasswordResetRequestComponent } from '@src/app/password-reset-request/p
 import { PasswordResetTokenUsageComponent } from '@src/app/password-reset-token-usage/password-reset-token-usage.component';
 
 import { IssueService } from '@src/app/issue.service';
+import { ShelterPickComponent } from '@src/app/shelter-pick/shelter-pick.component';
 
 
 // Uncomment and add to NgModule imports if you need to use two-way binding and/or HTTP wrapper
@@ -29,6 +30,7 @@ import { IssueService } from '@src/app/issue.service';
     EventComponent,
     PasswordResetRequestComponent,
     PasswordResetTokenUsageComponent,
+    ShelterPickComponent,
   ],
   imports: [
     NativeScriptFormsModule,

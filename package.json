@@ -43,7 +43,7 @@
     "@angular/compiler-cli": "~9.0.7",
     "@angular/language-service": "~9.0.7",
     "@nativescript/ios": "7.0.4",
-    "@nativescript/schematics": "~2.0.0",
+    "@nativescript/schematics": "9.0.0",
     "@nativescript/tslint-rules": "~0.0.5",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
@@ -63,7 +63,7 @@
     "typescript": "~3.7.5"
   },
   "nativescript": {
-    "id": "com.lotushouse.shelterapp",
+    "id": "com.lotushouse.app",
     "tns-android": {
       "version": "6.5.3"
     }

@@ -11,6 +11,7 @@ import { LoginComponent } from '@src/app/login/login.component';
 import { MainWindowComponent } from '@src/app/main-window/main-window.component';
 import { PasswordResetRequestComponent } from '@src/app/password-reset-request/password-reset-request.component';
 import { PasswordResetTokenUsageComponent } from '@src/app/password-reset-token-usage/password-reset-token-usage.component';
+import { ShelterPickComponent } from '@src/app/shelter-pick/shelter-pick.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PasswordResetTokenUsageComponent } from '@src/app/password-reset-token-
     LoginComponent,
     MainWindowComponent,
     PasswordResetRequestComponent,
-    PasswordResetTokenUsageComponent
+    PasswordResetTokenUsageComponent,
+    ShelterPickComponent
   ],
   imports: [
     BrowserModule,

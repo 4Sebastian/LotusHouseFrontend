@@ -8,9 +8,11 @@ import { EventComponent } from './event/event.component';
 import { LoginComponent } from './login/login.component';
 import { PasswordResetRequestComponent } from './password-reset-request/password-reset-request.component';
 import { PasswordResetTokenUsageComponent } from './password-reset-token-usage/password-reset-token-usage.component';
+import { ShelterPickComponent } from './shelter-pick/shelter-pick.component';
 
 export const routes: Routes = [
-  { path: '', component: MainWindowComponent, children: [
+  { path: '', component: ShelterPickComponent},
+  { path: 'shelterPicked', component: MainWindowComponent, children: [
     { path: '', component: HomeComponent},
     { path: 'event', component: EventComponent},
     { path: 'login', component: LoginComponent },

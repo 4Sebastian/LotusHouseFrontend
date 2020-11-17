@@ -18,6 +18,7 @@ export class IssueService {
   private token = new BehaviorSubject('');
   private loading = new BehaviorSubject('false');
   private reloading = new BehaviorSubject('false');
+  private shelterName = "";
   
 
   shareReloading = this.reloading.asObservable();
@@ -32,6 +33,7 @@ export class IssueService {
     console.log(this.date.getUTCDate());
     console.log(this.date.getUTCMonth());
     console.log(this.date.getUTCFullYear());
+    this.shelterName = "needShelter";
   }
 
   forceReload(){
@@ -73,6 +75,15 @@ export class IssueService {
     return 'fakeDate';
   }
 
+  getShelterName(){
+    console.log(this.shelterName.replace(" ", "|"));
+    return this.shelterName.replace(" ", "|");
+  }
+
+  setShelterName(name: string){
+    this.shelterName = name;
+  }
+
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
@@ -96,22 +107,22 @@ export class IssueService {
   //Get Arrays
   getEvents(){
     this.flipLoading();
-    return this.http.get(`${this.uri}/events/${this.getFakeFormDate()}`);
+    return this.http.get(`${this.uri}/events/${this.getShelterName()}/${this.getFakeFormDate()}`);
   }
   getRooms(){
     this.flipLoading();
-    return this.http.get(`${this.uri}/rooms/${this.getFormDate()}`);
+    return this.http.get(`${this.uri}/rooms/${this.getShelterName()}/${this.getFormDate()}`);
   }
 
 
   //Get Individual Indexes
   getEventById(id) {
     this.flipLoading();
-    return this.http.get(`${this.uri}/events/${this.getFakeFormDate()}/${id}`);
+    return this.http.get(`${this.uri}/events/${this.getShelterName()}/${this.getFakeFormDate()}/${id}`);
   }
   getRoomById(id) {
     this.flipLoading();
-    return this.http.get(`${this.uri}/rooms/${this.getFormDate()}/${id}`);
+    return this.http.get(`${this.uri}/rooms/${this.getShelterName()}/${this.getFormDate()}/${id}`);
   }
 
 
@@ -124,7 +135,7 @@ export class IssueService {
     };
     this.flipLoading();
     
-    return this.http.post(`${this.uri}/events/${this.getFakeFormDate()}/add`, event);
+    return this.http.post(`${this.uri}/events/${this.getShelterName()}/${this.getFakeFormDate()}/add`, event);
   }
   addRoom(name, number, events) {
     const room = {
@@ -134,7 +145,7 @@ export class IssueService {
     };
     this.flipLoading();
 
-    return this.http.post(`${this.uri}/rooms/${this.getFormDate()}/add`, room);
+    return this.http.post(`${this.uri}/rooms/${this.getShelterName()}/${this.getFormDate()}/add`, room);
   }
 
 
@@ -147,7 +158,7 @@ export class IssueService {
     };
     this.flipLoading();
 
-    return this.http.post(`${this.uri}/events/${this.getFakeFormDate()}/update/${id}`, event);
+    return this.http.post(`${this.uri}/events/${this.getShelterName()}/${this.getFakeFormDate()}/update/${id}`, event);
   }
   updateRoom(id, name, number, events) {
     const room = {
@@ -157,18 +168,18 @@ export class IssueService {
     };
     this.flipLoading();
 
-    return this.http.post(`${this.uri}/rooms/${this.getFormDate()}/update/${id}`, room);
+    return this.http.post(`${this.uri}/rooms/${this.getShelterName()}/${this.getFormDate()}/update/${id}`, room);
   }
 
 
   //Delete Individual Indexes
   deleteEvent(id){
     this.flipLoading();
-    return this.http.get(`${this.uri}/events/${this.getFakeFormDate()}/delete/${id}`);
+    return this.http.get(`${this.uri}/events/${this.getShelterName()}/${this.getFakeFormDate()}/delete/${id}`);
   }
   deleteRoom(id){
     this.flipLoading();
-    return this.http.get(`${this.uri}/rooms/${this.getFormDate()}/delete/${id}`);
+    return this.http.get(`${this.uri}/rooms/${this.getShelterName()}/${this.getFormDate()}/delete/${id}`);
   }
 
   //User Login Methods
