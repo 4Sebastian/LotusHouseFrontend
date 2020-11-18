@@ -33,7 +33,6 @@ export class IssueService {
     console.log(this.date.getUTCDate());
     console.log(this.date.getUTCMonth());
     console.log(this.date.getUTCFullYear());
-    this.shelterName = "needShelter";
   }
 
   forceReload(){
@@ -76,12 +75,11 @@ export class IssueService {
   }
 
   getShelterName(){
-    console.log(this.shelterName.replace(" ", "|"));
-    return this.shelterName.replace(" ", "|");
+    return getString("shelterName","needShelter");
   }
 
   setShelterName(name: string){
-    this.shelterName = name;
+    setString("shelterName", name);
   }
 
   delay(ms: number) {
@@ -269,6 +267,10 @@ export class IssueService {
 
   getToken(){
     return getString("jwtKey");
+  }
+
+  getAllNames(){
+    return this.http.post(`${this.uri}/user/getAllNames`, null);
   }
 
 

@@ -9,16 +9,25 @@ import { LoginComponent } from './login/login.component';
 import { PasswordResetRequestComponent } from './password-reset-request/password-reset-request.component';
 import { PasswordResetTokenUsageComponent } from './password-reset-token-usage/password-reset-token-usage.component';
 import { ShelterPickComponent } from './shelter-pick/shelter-pick.component';
+import { OptionsComponent } from './options/options.component';
+import { RegisterAccountComponent } from './register-account/register-account.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 export const routes: Routes = [
-  { path: '', component: ShelterPickComponent},
+  { path: '', component: ShelterPickComponent, children: [
+    
+  ]},
   { path: 'shelterPicked', component: MainWindowComponent, children: [
-    { path: '', component: HomeComponent},
+    { path: 'home', component: HomeComponent},
     { path: 'event', component: EventComponent},
-    { path: 'login', component: LoginComponent },
+    { path: 'login', component: LoginComponent, children: [
+      { path: 'options', component: OptionsComponent }
+    ]},
     { path: 'passwordResetRequest', component: PasswordResetRequestComponent },
     { path: 'resetFinalStep', component: PasswordResetTokenUsageComponent },
   ]},
+  { path: 'registerAccount', component: RegisterAccountComponent },
+  { path: 'createAccount', component: CreateAccountComponent }
 ];
 
 @NgModule({

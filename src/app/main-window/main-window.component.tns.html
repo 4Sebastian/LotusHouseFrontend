@@ -22,13 +22,13 @@
     <GridLayout dock="bottom" class="toggle" columns="*,*,*" (loaded)="onToggleLoaded($event)">
         <Label id="toggler" class="toggler"></Label>
 
-        <Label [nsRouterLink]="['/']" col="0" text="Home" class="toggle-lbl text-center"></Label>
+        <Label [nsRouterLink]="['/shelterPicked/home']" col="0" text="Home" class="toggle-lbl text-center"></Label>
 
-        <Label [nsRouterLink]="['/event']" col="1" text="Events" class="toggle-lbl text-center"></Label>
+        <Label [nsRouterLink]="['/shelterPicked/event']" col="1" text="Events" class="toggle-lbl text-center"></Label>
 
         <!-- <Label [nsRouterLink]="['/calender']" col="2" text="Date" class="toggle-lbl text-center"></Label> -->
 
-        <Label [nsRouterLink]="['/login']" col="2" text="Login" class="toggle-lbl text-center"></Label>
+        <Label [nsRouterLink]="['/shelterPicked/login']" col="2" text="Login" class="toggle-lbl text-center"></Label>
     </GridLayout>
 
 

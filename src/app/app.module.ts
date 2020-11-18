@@ -12,6 +12,9 @@ import { MainWindowComponent } from '@src/app/main-window/main-window.component'
 import { PasswordResetRequestComponent } from '@src/app/password-reset-request/password-reset-request.component';
 import { PasswordResetTokenUsageComponent } from '@src/app/password-reset-token-usage/password-reset-token-usage.component';
 import { ShelterPickComponent } from '@src/app/shelter-pick/shelter-pick.component';
+import { RegisterAccountComponent } from '@src/app/register-account/register-account.component';
+import { CreateAccountComponent } from '@src/app/create-account/create-account.component';
+import { OptionsComponent } from '@src/app/options/options.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { ShelterPickComponent } from '@src/app/shelter-pick/shelter-pick.compone
     MainWindowComponent,
     PasswordResetRequestComponent,
     PasswordResetTokenUsageComponent,
-    ShelterPickComponent
+    ShelterPickComponent,
+    RegisterAccountComponent,
+    CreateAccountComponent,
+    OptionsComponent
   ],
   imports: [
     BrowserModule,
