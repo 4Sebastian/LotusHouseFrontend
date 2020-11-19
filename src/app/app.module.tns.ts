@@ -20,6 +20,9 @@ import { RegisterAccountComponent } from '@src/app/register-account/register-acc
 import { CreateAccountComponent } from '@src/app/create-account/create-account.component';
 import { OptionsComponent } from '@src/app/options/options.component';
 
+import { registerElement } from 'nativescript-angular/element-registry';
+registerElement("DropDown", () => require("nativescript-drop-down/drop-down").DropDown);
+
 
 // Uncomment and add to NgModule imports if you need to use two-way binding and/or HTTP wrapper
 // import { NativeScriptFormsModule, NativeScriptHttpClientModule } from '@nativescript/angular';
