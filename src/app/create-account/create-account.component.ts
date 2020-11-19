@@ -19,17 +19,25 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  create(username: String, password: String, email: String, Sheltername: String){
+  create(username: String, password: String, email: String, Sheltername: String, token: String){
     if(!this.isValidEmail(email)){
       this.error = "Please enter a valid email"
       this.isWrong = true;
     }else if(username.length < 7){
       this.error = "Your username must be at least 8 characters long";
+      this.isWrong = true;
     }else if(password.length < 7){
       this.error = "Your password must be at least 8 characters long";
+      this.isWrong = true;
+    }else if(Sheltername.length < 1){
+      this.error = "Please enter you shelter's name";
+      this.isWrong = true;
+    }else if(token.length < 150){
+      this.error = "Please enter your specified token";
+      this.isWrong = true;
     }else{
       this.isWrong = false;
-      this.sendCreateRequest(username, password, email, Sheltername);
+      this.sendCreateRequest(username, password, email, Sheltername, token);
     }
   }
 
@@ -43,11 +51,12 @@ export class CreateAccountComponent implements OnInit {
     return phoneno.test(phoneNumber.toString());
   }
 
-  async sendCreateRequest(username: String, password: String, email: String, Sheltername: String){
+  async sendCreateRequest(username: String, password: String, email: String, Sheltername: String, token: String){
     try{
-      await this.issueService.createAccount(username, password, email, Sheltername).subscribe();
+      await this.issueService.createAccount(username, password, email, Sheltername, token).subscribe();
     }catch(e){
       console.log(e);
+      this.error = e;
       this.isWrong = true;
     }
     

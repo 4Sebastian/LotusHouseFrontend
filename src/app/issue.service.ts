@@ -287,7 +287,9 @@ export class IssueService {
       email: email,
       hashedPassword: password,
     }
-    return this.http.post(`${this.uri}/user/signup`, user);
+    const header = new HttpHeaders({ "Authorization": "Bearer " + token });
+
+    return this.http.post(`${this.uri}/user/signup`, user, {headers: header });
   }
 
   async getAllNames(){
