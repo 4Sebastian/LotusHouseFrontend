@@ -5,6 +5,7 @@
                 <Label text="You are logged in!" class="loggedLbl"></Label>
                 <Button text="Logout" (tap)="logout()"></Button>
             </StackLayout>
+            
             <GridLayout rows="auto, auto, auto, auto, auto" columns="auto, *, auto"
                 visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" class="mobileForm">
                 <Label row="0" col="0" text="Username:"></Label>
@@ -19,6 +20,11 @@
                 <Label row="4" col="1" visibility="{{ isLoggedIn() ? 'collapsed' : 'visible' }}"
                     text="Please check Login Info" textWrap="true"></Label>
                 <Button row="4" col="2" text="Enter" (tap)="onSubmit(password.text, username.text)"></Button>
+            </GridLayout>
+            <GridLayout class="options" rows="auto, auto", columns="*,auto">
+                <ListPicker #listpicker row="0" col="0" colSpan="2" [items]="names"></ListPicker>
+                <Label row="1" col="0" textAlignment="center" verticalAlignment="center" text="Would you like this as your default shelter?" textWrap="true"></Label>
+                <Switch row="1" col="1" checked="true" color="pink" backgroundColor="gray" offBackgroundColor="gray"></Switch>
             </GridLayout>
         </StackLayout>
     </DockLayout>

@@ -270,7 +270,7 @@ export class IssueService {
   }
 
   getAllNames(){
-    return this.http.post(`${this.uri}/user/getAllNames`, null);
+    return this.http.post(`${this.uri}/user/getAllNames`, {});
   }
 
 

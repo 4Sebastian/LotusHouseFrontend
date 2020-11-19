@@ -20,7 +20,11 @@ Button {
 }
 
 .centerClass {
-    vertical-align: middle;
+}
+
+.options {
+    margin-left: 10;
+    margin-right: 10;
 }
 
 .mobileForm {

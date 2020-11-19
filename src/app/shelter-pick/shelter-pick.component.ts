@@ -16,7 +16,7 @@ export class ShelterPickComponent implements OnInit {
     page.actionBarHidden = true;
     
     this.fetchNames();
-    
+    console.log("calledHere");
     
   }
 

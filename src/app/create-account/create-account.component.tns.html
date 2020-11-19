@@ -1,18 +1,25 @@
 <DockLayout class="parent" stretchLastChild="true">
     <GridLayout dock="bottom" class="bottomBar" rows="auto" columns="*, *">
-        <Label row="0" col="0" [nsRouterLink]="['/registerAccount']" textWrap="true" textAlignment="center" verticalAlignment="center" 
-            text="Register for an account"></Label>
-        <Label row="0" col="1" [nsRouterLink]="['/createAccount']" textWrap="true" textAlignment="center" verticalAlignment="center" text="Create new account"></Label>
+        <Label row="0" col="0" [nsRouterLink]="['/registerAccount']" textWrap="true" textAlignment="center"
+            verticalAlignment="center" text="Register for an account"></Label>
+        <Label row="0" col="1" [nsRouterLink]="['/']" textWrap="true" textAlignment="center" verticalAlignment="center"
+            text="Shelter Selection"></Label>
+
     </GridLayout>
     <DockLayout dock="top" class="parent2" stretchLastChild="true">
         <StackLayout class="centerClass">
-            <GridLayout rows="auto, auto, auto, auto, auto" columns="*, auto" class="mobileForm">
-                <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center" text="Pick a homeless shelter:"></Label>
-                <ListPicker #listpicker row="1" col="0" colSpan="2" [items]="names"></ListPicker>
-                <Label row="2" col="0" textAlignment="center" verticalAlignment="center" text="Would you like this as your default shelter?"></Label>
-                <Switch row="2" col="1" checked="true" color="pink" backgroundColor="gray" offBackgroundColor="gray"></Switch>
-                <Button row="3" col="0" colSpan="2" text="Continue"
-                    [nsRouterLink]="['/shelterPicked/home']" (tap)="giveName(listpicker.selectedIndex)"></Button>
+            <GridLayout rows="auto, auto, auto, auto, auto, auto" columns="auto, *" class="mobileForm">
+                <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center"
+                    text="Create a new account:"></Label>
+                <Label row="1" col="0" textAlignment="center" verticalAlignment="center" text="Username:"></Label>
+                <TextField #username row="1" col="1"></TextField>
+                <Label row="2" col="0" textAlignment="center" verticalAlignment="center" text="Password:"></Label>
+                <TextField #password row="2" col="1"></TextField>
+                <Label row="3" col="0" textAlignment="center" verticalAlignment="center" text="Email Address:"></Label>
+                <TextField #email row="3" col="1"></TextField>
+                <Label row="4" col="0" textAlignment="center" verticalAlignment="center" text="Shelter Name:"></Label>
+                <TextField #Sheltername row="4" col="1"></TextField>
+                <Button row="5" col="0" text="Register" (tap)="register(username.text, password.text, email.text, Sheltername.text)"></Button>
             </GridLayout>
         </StackLayout>
     </DockLayout>
