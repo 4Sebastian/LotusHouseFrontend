@@ -32,15 +32,7 @@ export class ShelterPickComponent implements OnInit {
   }
 
   async fetchNames(){
-    await this.issueService.getAllNames().subscribe((data: String) => { 
-      let stringOfNames = JSON.stringify(data);
-      let removedEdgeString = stringOfNames.substring(2, stringOfNames.length-2);
-      this.names = new ObservableArray(removedEdgeString.substring(10, removedEdgeString.length).split("||"));
-      console.log('Data requested ...');
-      console.log(stringOfNames);
-      console.log(this.names);
-      console.log(this.names.length);
-    });
+    this.names = await this.issueService.getAllNames();
   }
 
   giveName(i: Number, checked: Boolean){

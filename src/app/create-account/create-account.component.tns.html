@@ -1,25 +1,28 @@
 <DockLayout class="parent" stretchLastChild="true">
     <GridLayout dock="bottom" class="bottomBar" rows="auto" columns="*, *">
-        <Label row="0" col="0" [nsRouterLink]="['/registerAccount']" textWrap="true" textAlignment="center"
-            verticalAlignment="center" text="Register for an account"></Label>
-        <Label row="0" col="1" [nsRouterLink]="['/']" textWrap="true" textAlignment="center" verticalAlignment="center"
-            text="Shelter Selection"></Label>
+        <Button row="0" col="0" [nsRouterLink]="['/registerAccount']" textWrap="true" textAlignment="center"
+            verticalAlignment="center" text="Register for an account"></Button>
+        <Button row="0" col="1" [nsRouterLink]="['/']" textWrap="true" textAlignment="center" verticalAlignment="center"
+            text="Shelter Selection"></Button>
 
     </GridLayout>
     <DockLayout dock="top" class="parent2" stretchLastChild="true">
         <StackLayout class="centerClass">
-            <GridLayout rows="auto, auto, auto, auto, auto, auto" columns="auto, *" class="mobileForm">
+            <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto, auto" columns="auto, *" class="mobileForm">
                 <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center"
                     text="Create a new account:"></Label>
                 <Label row="1" col="0" textAlignment="center" verticalAlignment="center" text="Username:"></Label>
-                <TextField #username row="1" col="1"></TextField>
+                <TextField #username row="1" col="1" hint="Enter Username Here:"></TextField>
                 <Label row="2" col="0" textAlignment="center" verticalAlignment="center" text="Password:"></Label>
-                <TextField #password row="2" col="1"></TextField>
+                <TextField #password row="2" col="1" secure="true" hint="Enter Password Here:"></TextField>
                 <Label row="3" col="0" textAlignment="center" verticalAlignment="center" text="Email Address:"></Label>
-                <TextField #email row="3" col="1"></TextField>
+                <TextField #email row="3" col="1" keyboardType="email" hint="Enter Email Here:"></TextField>
                 <Label row="4" col="0" textAlignment="center" verticalAlignment="center" text="Shelter Name:"></Label>
-                <TextField #Sheltername row="4" col="1"></TextField>
-                <Button row="5" col="0" text="Register" (tap)="register(username.text, password.text, email.text, Sheltername.text)"></Button>
+                <TextField #Sheltername row="4" col="1" hint="Enter Shelter Name Here:"></TextField>
+                <Label row="5" col="0" colSpan="2" textAlignment="center" verticalAlignment="center" text="Token:"></Label>
+                <TextView #token row="6" col="0" colSpan="2" hint="Enter Token Here:"></TextView>
+                <Label row="7" col="0" colSpan="2" text="{{error}}" color="red" visibility="{{ !isWrong ? 'collapsed' : 'visible' }}"></Label>
+                <Button row="8" col="0" text="Create" (tap)="create(username.text, password.text, email.text, Sheltername.text, token.text)"></Button>
             </GridLayout>
         </StackLayout>
     </DockLayout>

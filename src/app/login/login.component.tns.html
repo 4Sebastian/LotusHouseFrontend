@@ -22,9 +22,18 @@
                 <Button row="4" col="2" text="Enter" (tap)="onSubmit(password.text, username.text)"></Button>
             </GridLayout>
             <GridLayout class="options" rows="auto, auto", columns="*,auto">
-                <ListPicker #listpicker row="0" col="0" colSpan="2" [items]="names"></ListPicker>
-                <Label row="1" col="0" textAlignment="center" verticalAlignment="center" text="Would you like this as your default shelter?" textWrap="true"></Label>
-                <Switch row="1" col="1" checked="true" color="pink" backgroundColor="gray" offBackgroundColor="gray"></Switch>
+                <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center"
+                    text="Change selected homeless shelter:"></Label>
+                <!-- <ListPicker #listpicker row="1" col="0" colSpan="2" [items]="names"></ListPicker> -->
+                <dd:DropDown #listpicker [items]="names" color="black" hint="select shelter" opened="dropDownOpened"class="listpicker"
+                    selectedIndex="{{ getInitialIndex() }}" closed="dropDownClosed" selectedIndexChanged="dropDownSelectedIndexChanged" row="1" col="0"
+                    colSpan="2" />
+                <Label row="2" col="0" colSpan="2" visibility="{{ !pickedShelter ? 'collapsed' : 'visible' }}" textAlignment="center" verticalAlignment="center" color="red"
+                text="Please select an actual homeless shelter"></Label>
+                <Label row="3" col="0" textAlignment="center" verticalAlignment="center"
+                    text="Would you like this as your default shelter?"></Label>
+                <Switch #defaultSwitch row="3" col="1" checked="true" color="pink" backgroundColor="lightgray" offBackgroundColor="gray">
+                </Switch>
             </GridLayout>
         </StackLayout>
     </DockLayout>

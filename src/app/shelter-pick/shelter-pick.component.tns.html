@@ -1,10 +1,10 @@
 <DockLayout class="parent" stretchLastChild="true" xmlns="http://schemas.nativescript.org/tns.xsd"
     xmlns:dd="nativescript-drop-down">
     <GridLayout dock="bottom" class="bottomBar" rows="auto" columns="*, *">
-        <Label row="0" col="0" [nsRouterLink]="['/registerAccount']" textWrap="true" textAlignment="center"
-            verticalAlignment="center" text="Register for an account"></Label>
-        <Label row="0" col="1" [nsRouterLink]="['/createAccount']" textWrap="true" textAlignment="center"
-            verticalAlignment="center" text="Create new account"></Label>
+        <Button row="0" col="0" [nsRouterLink]="['/registerAccount']" textWrap="true" textAlignment="center"
+            verticalAlignment="center" text="Register for an account"></Button>
+        <Button row="0" col="1" [nsRouterLink]="['/createAccount']" textWrap="true" textAlignment="center"
+            verticalAlignment="center" text="Create new account"></Button>
     </GridLayout>
     <DockLayout dock="top" class="parent2" stretchLastChild="true">
         <StackLayout class="centerClass">
@@ -12,14 +12,14 @@
                 <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center"
                     text="Pick a homeless shelter:"></Label>
                 <!-- <ListPicker #listpicker row="1" col="0" colSpan="2" [items]="names"></ListPicker> -->
-                <dd:DropDown #listpicker [items]="names" color="black" hint="select shelter" opened="dropDownOpened"
+                <dd:DropDown #listpicker [items]="names" color="black" hint="select shelter" opened="dropDownOpened"class="listpicker"
                     selectedIndex="0" closed="dropDownClosed" selectedIndexChanged="dropDownSelectedIndexChanged" row="1" col="0"
                     colSpan="2" />
                 <Label row="2" col="0" colSpan="2" visibility="{{ !pickedShelter ? 'collapsed' : 'visible' }}" textAlignment="center" verticalAlignment="center" color="red"
                 text="Please select an actual homeless shelter"></Label>
                 <Label row="3" col="0" textAlignment="center" verticalAlignment="center"
                     text="Would you like this as your default shelter?"></Label>
-                <Switch #defaultSwitch row="3" col="1" checked="true" color="pink" backgroundColor="gray" offBackgroundColor="gray">
+                <Switch #defaultSwitch row="3" col="1" checked="true" color="pink" backgroundColor="lightgray" offBackgroundColor="gray">
                 </Switch>
                 <Button row="4" col="0" colSpan="2" text="Continue" (tap)="giveName(listpicker.selectedIndex, defaultSwitch.checked)"></Button>
             </GridLayout>

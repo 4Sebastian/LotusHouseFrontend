@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { getString, setString } from '@nativescript/core/application-settings';
 //import { getString, setString } from '@nativescript/core/application-settings/application-settings';
 import { Event } from './model.ts/event.model';
+import { ObservableArray } from '@nativescript/core/data/observable-array';
 //import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -269,8 +270,39 @@ export class IssueService {
     return getString("jwtKey");
   }
 
-  getAllNames(){
-    return this.http.post(`${this.uri}/user/getAllNames`, {});
+  requestAccount(firstname: String, lastname: String, email: String, phoneNumber: String, shelterName: String){
+    const user = {
+      name: firstname + ", " + lastname,
+      shelter: shelterName,
+      email: email,
+      phoneNumber: phoneNumber,
+    }
+    return this.http.post(`${this.uri}/user/register`, user);
+  }
+
+  createAccount(username: String, password: String, email: String, Sheltername: String, token: String){
+    const user = {
+      username: username,
+      shelterName: Sheltername,
+      email: email,
+      hashedPassword: password,
+    }
+    return this.http.post(`${this.uri}/user/signup`, user);
+  }
+
+  async getAllNames(){
+    var names = new ObservableArray<String>();
+    await this.http.post(`${this.uri}/user/getAllNames`, {}).subscribe((data: String) => { 
+      let stringOfNames = JSON.stringify(data);
+      let removedEdgeString = stringOfNames.substring(2, stringOfNames.length-2);
+      names = new ObservableArray(removedEdgeString.substring(10, removedEdgeString.length).split("||"));
+      console.log('Data requested ...');
+      console.log(stringOfNames);
+      console.log(names);
+      console.log(names.length);
+    });
+    names.pop();
+    return names;
   }
 
 
