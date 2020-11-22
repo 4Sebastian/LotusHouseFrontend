@@ -1,1 +1,31 @@
-<Button text="update-username works!" class="btn btn-primary"></Button>
+<DockLayout class="parent" stretchLastChild="true">
+    <GridLayout dock="bottom" class="bottomBar" rows="auto" columns="*">
+        <GridLayout row="0" col="0" rows="auto" columns="*" visibility="{{ hasUpdatedAccount() ? 'visible' : 'collapsed' }}">
+            <Button row="0" col="0" [nsRouterLink]="['/']" textWrap="true" textAlignment="center"
+            verticalAlignment="center" text="Back to Shelter Selection"></Button>
+        </GridLayout>
+        <GridLayout row="0" col="0" rows="auto" columns="*, *" visibility="{{ hasUpdatedAccount() ? 'collapsed' : 'visible' }}">
+            <Button row="0" col="0" [nsRouterLink]="['/shelterPicked/login']" textWrap="true" textAlignment="center"
+        verticalAlignment="center" text="Back to Login"></Button>
+        <Button row="0" col="1"  [nsRouterLink]="['/shelterPicked/options']" textWrap="true" textAlignment="center"
+        verticalAlignment="center" text="Back to Options"></Button>
+        </GridLayout>
+        
+        
+    </GridLayout>
+    <DockLayout dock="top" class="parent2" stretchLastChild="true">
+        <StackLayout class="centerClass">
+            <GridLayout rows="auto, auto, auto, auto, auto, auto" columns="*" class="mobileForm">
+                <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center" text="To update this account's username, fill in these fields:"></Label>
+                <Label row="1" col="0" verticalAlignment="center" text="This is your current username: {{ getCurrentUsername() }}"></Label>
+                <Label row="2" col="0" verticalAlignment="center" text="Enter new username:"></Label>
+                <TextField #updatedInfo row="3" col="0" hint="Enter Username Here:"></TextField>
+                <Label row="4" col="0" text="{{error}}" visibility="{{ !isWrong ? 'collapsed' : 'visible' }}" color="red"></Label>
+                <Button row="5" col="0" text="Delete" (tap)="update(updatedInfo.text)"></Button>
+            </GridLayout>
+            <GridLayout rows="auto" columns="*" class="mobileForm" visibility="{{ hasUpdatedAccount() ? 'visible' : 'collapsed' }}"> 
+                <Label row="0" col="0" textAlignment="center" verticalAlignment="center" textWrap="true" text="Your account has been updated!"></Label>
+            </GridLayout>
+        </StackLayout>
+    </DockLayout>
+</DockLayout>

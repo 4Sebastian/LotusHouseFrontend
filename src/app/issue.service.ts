@@ -4,8 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { getString, setString } from '@nativescript/core/application-settings';
 //import { getString, setString } from '@nativescript/core/application-settings/application-settings';
-import { Event } from './model.ts/event.model';
-import { ObservableArray } from '@nativescript/core/data/observable-array';
 //import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -296,12 +294,42 @@ export class IssueService {
     return this.http.post(`${this.uri}/user/signup`, user, {headers: header });
   }
 
+  deleteAccount(username: String, password: String, email: String){
+    const deleteProfile = {
+      name: username, 
+      shelter: this.getShelterName(),
+      email: email,
+      hashedPassword: password
+    }
+    return this.http.post(`${this.uri}/user/deleteAccount`, deleteProfile, this.getLoginHeader());
+  }
+  
+  updateUsername(updatedInfo: String){
+    const updatePackage = {
+      shelter: this.getShelterName(),
+      userName: updatedInfo
+    }
+    return this.http.post(`${this.uri}/user/updateUser`, updatePackage, this.getLoginHeader());
+  }
+
+  updatePassword(updatedInfo: String){
+    const updatePackage = {
+      shelter: this.getShelterName(),
+      userName: updatedInfo
+    }
+    return this.http.post(`${this.uri}/user/updatePassword`, updatePackage, this.getLoginHeader());
+  }
+
   getAllNames(){
     return this.http.post(`${this.uri}/user/getAllNames`, null);
   }
 
   getCurrentURIName(){
     return encodeURI(this.getShelterName().toString());
+  }
+
+  getLoginHeader(){
+    return { headers: new HttpHeaders({ "Authorization": "Bearer " + this.getToken() }) };
   }
    
 
