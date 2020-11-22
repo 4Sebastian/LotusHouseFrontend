@@ -15,6 +15,9 @@ import { ShelterPickComponent } from '@src/app/shelter-pick/shelter-pick.compone
 import { RegisterAccountComponent } from '@src/app/register-account/register-account.component';
 import { CreateAccountComponent } from '@src/app/create-account/create-account.component';
 import { OptionsComponent } from '@src/app/options/options.component';
+import { DeleteAccountComponent } from '@src/app/delete-account/delete-account.component';
+import { UpdateUsernameComponent } from '@src/app/update-username/update-username.component';
+import { UpdatePasswordComponent } from '@src/app/update-password/update-password.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { OptionsComponent } from '@src/app/options/options.component';
     ShelterPickComponent,
     RegisterAccountComponent,
     CreateAccountComponent,
-    OptionsComponent
+    OptionsComponent,
+    DeleteAccountComponent,
+    UpdateUsernameComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,

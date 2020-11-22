@@ -1,10 +1,14 @@
 <DockLayout class="parent" stretchLastChild="true" xmlns="http://schemas.nativescript.org/tns.xsd"
 xmlns:dd="nativescript-drop-down">
     <DockLayout dock="top" class="parent2" stretchLastChild="true">
-        <StackLayout class="centerClass">
+        <StackLayout class="centerClass" stretchLastChild="true" verticalAlignment="{{ hasLoggedIn() ? 'top' : 'middle' }}">
             <StackLayout visibility="{{ hasLoggedIn() ? 'collapsed' : 'visible' }}" class="loggedIn">
                 <Label text="You are logged in!" class="loggedLbl"></Label>
-                <Button text="Logout" (tap)="logout()"></Button>
+                <GridLayout rows="auto" columns="*,*">
+                    <Button row="0" col="0" text="Logout" (tap)="logout()"></Button>
+                    <Button row="0" col="1" text="Options" [nsRouterLink]="['/shelterPicked/options']"></Button>
+                </GridLayout>
+                
             </StackLayout>
             
             <GridLayout rows="auto, auto, auto, auto, auto" columns="auto, *, auto"
@@ -22,19 +26,20 @@ xmlns:dd="nativescript-drop-down">
                     text="Please check Login Info" textWrap="true"></Label>
                 <Button row="4" col="2" text="Enter" (tap)="onSubmit(password.text, username.text)"></Button>
             </GridLayout>
-            <GridLayout class="options" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" rows="auto, auto", columns="*,auto">
+
+            <GridLayout class="options" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" rows="auto, auto, auto", columns="*,auto">
                 <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center"
                     text="Change your homeless shelter:"></Label>
                 <!-- <ListPicker #listpicker row="1" col="0" colSpan="2" [items]="names"></ListPicker> -->
-                <dd:DropDown #listpicker [items]="names" color="black" hint="select shelter" opened="dropDownOpened" class="listpicker"
-                    selectedIndex="{{ selectedShelter }}" (selectedIndexChanged)="dropDownSelectedIndexChanged(listpicker.selectedIndex)" row="1" col="0"
+                <dd:DropDown #listpicker [items]="names" hint="select shelter" class="listpicker" selectedIndex="0" (selectedIndexChanged)="dropDownSelectedIndexChanged(listpicker.selectedIndex)" row="1" col="0"
                     colSpan="2" />
-                <Label row="2" col="0" colSpan="2" visibility="{{ !pickedShelter ? 'collapsed' : 'visible' }}" textAlignment="center" verticalAlignment="center" color="red"
-                text="Please select an actual homeless shelter"></Label>
-                <Label row="3" col="0" textAlignment="center" verticalAlignment="center"
+                <!-- <Label row="2" col="0" colSpan="2" visibility="{{ !pickedShelter ? 'collapsed' : 'visible' }}" textAlignment="center" verticalAlignment="center" color="red"
+                text="Please select an actual homeless shelter"></Label> -->
+                <Label row="2" col="0" textAlignment="center" verticalAlignment="center"
                     text="Would you like this as your default shelter?"></Label>
-                <Switch #defaultSwitch row="3" col="1" checked="{{isChecked}}" color="pink" backgroundColor="lightgray" offBackgroundColor="gray" (checkedChange)="onCheckedChange(defaultSwitch.checked)">
+                <Switch #defaultSwitch row="2" col="1" [checked]="isChecked" color="pink" backgroundColor="lightgray" offBackgroundColor="gray" (checkedChange)="onCheckedChange($event)"></Switch>
             </GridLayout>
+
             <GridLayout dock="bottom" class="bottomBar" visibility="{{ isNotLoggedIn() ? 'collapsed' : 'visible' }}" rows="auto" columns="*, *">
                 <Button row="0" col="0" [nsRouterLink]="['/registerAccount']" textWrap="true" textAlignment="center"
                     verticalAlignment="center" text="Register for an account"></Button>

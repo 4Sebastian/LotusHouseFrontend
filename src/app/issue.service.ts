@@ -106,22 +106,22 @@ export class IssueService {
   //Get Arrays
   getEvents(){
     this.flipLoading();
-    return this.http.get(`${this.uri}/events/${this.getShelterName()}/${this.getFakeFormDate()}`);
+    return this.http.get(`${this.uri}/events/${this.getCurrentURIName()}/${this.getFakeFormDate()}`);
   }
   getRooms(){
     this.flipLoading();
-    return this.http.get(`${this.uri}/rooms/${this.getShelterName()}/${this.getFormDate()}`);
+    return this.http.get(`${this.uri}/rooms/${this.getCurrentURIName()}/${this.getFormDate()}`);
   }
 
 
   //Get Individual Indexes
   getEventById(id) {
     this.flipLoading();
-    return this.http.get(`${this.uri}/events/${this.getShelterName()}/${this.getFakeFormDate()}/${id}`);
+    return this.http.get(`${this.uri}/events/${this.getCurrentURIName()}/${this.getFakeFormDate()}/${id}`);
   }
   getRoomById(id) {
     this.flipLoading();
-    return this.http.get(`${this.uri}/rooms/${this.getShelterName()}/${this.getFormDate()}/${id}`);
+    return this.http.get(`${this.uri}/rooms/${this.getCurrentURIName()}/${this.getFormDate()}/${id}`);
   }
 
 
@@ -130,21 +130,23 @@ export class IssueService {
     const event = {
       title: title,
       date: date,
-      description: description
+      description: description,
+      shelterName: this.getCurrentURIName()
     };
     this.flipLoading();
     
-    return this.http.post(`${this.uri}/events/${this.getShelterName()}/${this.getFakeFormDate()}/add`, event);
+    return this.http.post(`${this.uri}/events/${this.getCurrentURIName()}/${this.getFakeFormDate()}/add`, event);
   }
   addRoom(name, number, events) {
     const room = {
       name: name,
       number: number,
-      events: events
+      events: events,
+      shelterName: this.getCurrentURIName()
     };
     this.flipLoading();
 
-    return this.http.post(`${this.uri}/rooms/${this.getShelterName()}/${this.getFormDate()}/add`, room);
+    return this.http.post(`${this.uri}/rooms/${this.getCurrentURIName()}/${this.getFormDate()}/add`, room);
   }
 
 
@@ -153,32 +155,34 @@ export class IssueService {
     const event = {
       title: title,
       date: date,
-      description: description
+      description: description,
+      shelterName: this.getCurrentURIName()
     };
     this.flipLoading();
 
-    return this.http.post(`${this.uri}/events/${this.getShelterName()}/${this.getFakeFormDate()}/update/${id}`, event);
+    return this.http.post(`${this.uri}/events/${this.getCurrentURIName()}/${this.getFakeFormDate()}/update/${id}`, event);
   }
   updateRoom(id, name, number, events) {
     const room = {
       name: name,
       number: number,
-      events: events
+      events: events,
+      shelterName: this.getCurrentURIName()
     };
     this.flipLoading();
 
-    return this.http.post(`${this.uri}/rooms/${this.getShelterName()}/${this.getFormDate()}/update/${id}`, room);
+    return this.http.post(`${this.uri}/rooms/${this.getCurrentURIName()}/${this.getFormDate()}/update/${id}`, room);
   }
 
 
   //Delete Individual Indexes
   deleteEvent(id){
     this.flipLoading();
-    return this.http.get(`${this.uri}/events/${this.getShelterName()}/${this.getFakeFormDate()}/delete/${id}`);
+    return this.http.get(`${this.uri}/events/${this.getCurrentURIName()}/${this.getFakeFormDate()}/delete/${id}`);
   }
   deleteRoom(id){
     this.flipLoading();
-    return this.http.get(`${this.uri}/rooms/${this.getShelterName()}/${this.getFormDate()}/delete/${id}`);
+    return this.http.get(`${this.uri}/rooms/${this.getCurrentURIName()}/${this.getFormDate()}/delete/${id}`);
   }
 
   //User Login Methods
@@ -292,20 +296,14 @@ export class IssueService {
     return this.http.post(`${this.uri}/user/signup`, user, {headers: header });
   }
 
-  async getAllNames(){
-    var names = new ObservableArray<String>();
-    await this.http.post(`${this.uri}/user/getAllNames`, {}).subscribe((data: String) => { 
-      let stringOfNames = JSON.stringify(data);
-      let removedEdgeString = stringOfNames.substring(2, stringOfNames.length-2);
-      names = new ObservableArray(removedEdgeString.substring(10, removedEdgeString.length).split("||"));
-      console.log('Data requested ...');
-      console.log(stringOfNames);
-      console.log(names);
-      console.log(names.length);
-    });
-    names.pop();
-    return names;
+  getAllNames(){
+    return this.http.post(`${this.uri}/user/getAllNames`, null);
   }
+
+  getCurrentURIName(){
+    return encodeURI(this.getShelterName().toString());
+  }
+   
 
 
 

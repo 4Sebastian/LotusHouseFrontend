@@ -11,6 +11,7 @@ export class RegisterAccountComponent implements OnInit {
 
   error: String;
   isWrong = false;
+  sentRequest = false;
 
   constructor(private issueService: IssueService,private page: Page) {
     page.actionBarHidden = true;
@@ -36,7 +37,9 @@ export class RegisterAccountComponent implements OnInit {
       this.error = "Please enter your shelter's name";
     }else{
       this.isWrong = false;
+      this.sentRequest = true;
       this.sendRegisterRequest(firstname, lastname, email, phoneNumber, shelterName);
+      
     }
   }
 
@@ -56,6 +59,7 @@ export class RegisterAccountComponent implements OnInit {
     }catch(e){
       console.log(e);
       this.isWrong = true;
+      this.sentRequest = false;
     }
     
   }

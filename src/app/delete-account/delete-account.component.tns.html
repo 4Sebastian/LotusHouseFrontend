@@ -1,0 +1,34 @@
+<DockLayout class="parent" stretchLastChild="true">
+    <GridLayout dock="bottom" class="bottomBar" rows="auto" columns="*">
+        <GridLayout row="0" col="0" rows="auto" columns="*" visibility="{{ hasDeletedAccount() ? 'visible' : 'collapsed' }}">
+            <Button row="0" col="0" [nsRouterLink]="['/']" textWrap="true" textAlignment="center"
+            verticalAlignment="center" text="Back to Shelter Selection"></Button>
+        </GridLayout>
+        <GridLayout row="0" col="0" rows="auto" columns="*, *" visibility="{{ hasDeletedAccount() ? 'collapsed' : 'visible' }}">
+            <Button row="0" col="0" [nsRouterLink]="['/shelterPicked/login']" textWrap="true" textAlignment="center"
+        verticalAlignment="center" text="Back to Login"></Button>
+        <Button row="0" col="1"  [nsRouterLink]="['/shelterPicked/options']" textWrap="true" textAlignment="center"
+        verticalAlignment="center" text="Back to Options"></Button>
+        </GridLayout>
+        
+        
+    </GridLayout>
+    <DockLayout dock="top" class="parent2" stretchLastChild="true">
+        <StackLayout class="centerClass">
+            <GridLayout rows="auto, auto, auto, auto, auto, auto" columns="auto, *" class="mobileForm">
+                <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center" text="To delete this account, fill in these fields:"></Label>
+                <Label row="1" col="0" verticalAlignment="center" text="Username:"></Label>
+                <TextField #firstname row="1" col="1" hint="Enter Username Here:" ></TextField>
+                <Label row="2" col="0" verticalAlignment="center" text="Password:"></Label>
+                <TextField #lastname row="2" col="1" hint="Enter Password Here:"></TextField>
+                <Label row="3" col="0" verticalAlignment="center" text="Email Address:"></Label>
+                <TextField #email row="3" col="1" keyboardType="email" hint="Enter Email Here:"></TextField>
+                <Label row="4" col="0" colSpan="2" text="{{error}}" visibility="{{ !isWrong ? 'collapsed' : 'visible' }}" color="red"></Label>
+                <Button row="5" col="0" text="Delete" (tap)="delete(firstname.text, lastname.text, email.text, phoneNumber.text, Sheltername.text)"></Button>
+            </GridLayout>
+            <GridLayout rows="auto" columns="*" class="mobileForm" visibility="{{ hasDeletedAccount() ? 'visible' : 'collapsed' }}"> 
+                <Label row="0" col="0" textAlignment="center" verticalAlignment="center" textWrap="true" text="Your account has been deleted. You may go back to the shelter selection menu to change shelters. To make a new account, please register for a new one."></Label>
+            </GridLayout>
+        </StackLayout>
+    </DockLayout>
+</DockLayout>

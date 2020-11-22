@@ -1,1 +1,6 @@
 /* Add mobile styles for the component here.  */
+Button{
+    border-width: 2;
+    border-color: pink;
+    border-radius: 5;
+}

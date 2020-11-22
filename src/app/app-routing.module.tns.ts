@@ -12,6 +12,9 @@ import { ShelterPickComponent } from './shelter-pick/shelter-pick.component';
 import { OptionsComponent } from './options/options.component';
 import { RegisterAccountComponent } from './register-account/register-account.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
+import { UpdateUsernameComponent } from './update-username/update-username.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 export const routes: Routes = [
   { path: '', component: ShelterPickComponent, children: [
@@ -20,9 +23,11 @@ export const routes: Routes = [
   { path: 'shelterPicked', component: MainWindowComponent, children: [
     { path: 'home', component: HomeComponent},
     { path: 'event', component: EventComponent},
-    { path: 'login', component: LoginComponent, children: [
-      { path: 'options', component: OptionsComponent }
-    ]},
+    { path: 'login', component: LoginComponent},
+    { path: 'options', component: OptionsComponent },
+    { path: 'delete', component: DeleteAccountComponent },
+    { path: 'updateUsername', component: UpdateUsernameComponent },
+    { path: 'updatePassword', component: UpdatePasswordComponent },
     { path: 'passwordResetRequest', component: PasswordResetRequestComponent },
     { path: 'resetFinalStep', component: PasswordResetTokenUsageComponent },
   ]},

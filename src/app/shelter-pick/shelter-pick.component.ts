@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { getString, setString } from '@nativescript/core/application-settings';
 import { ObservableArray } from '@nativescript/core/data/observable-array';
 import { Page } from '@nativescript/core/ui/page';
@@ -13,26 +14,34 @@ export class ShelterPickComponent implements OnInit {
 
   names: ObservableArray<String>;
   pickedShelter = false;
+  loading: Boolean = true;
+  isChecked = true;
 
-  constructor(private page: Page, private issueService: IssueService) {
+  constructor(private page: Page, private issueService: IssueService, private route: Router) {
     page.actionBarHidden = true;
-    
-    if(getString("defaultShelter", "false") == "true"){
-      //transfer to next page
-    }
     
     this.fetchNames();
     console.log("calledHere");
 
-    
-    
+    if(getString("defaultShelter", "true") == "false"){
+      this.isChecked = false;
+    }
   }
 
   ngOnInit(): void {
   }
 
   async fetchNames(){
-    this.names = await this.issueService.getAllNames();
+    await this.issueService.getAllNames().subscribe((data: String) => { 
+      let stringOfNames = JSON.stringify(data);
+      let removedEdgeString = stringOfNames.substring(2, stringOfNames.length-2);
+      this.names = new ObservableArray(removedEdgeString.substring(10, removedEdgeString.length).split("||"));
+      console.log('Data requested ...');
+      console.log(stringOfNames);
+      this.names.pop();
+      console.log(this.names);
+      console.log(this.names.length);
+    });
   }
 
   giveName(i: Number, checked: Boolean){
@@ -49,8 +58,9 @@ export class ShelterPickComponent implements OnInit {
         this.pickedShelter = false;
         console.log("worked");
         setString("defaultShelter", "" + checked);
+        setString("selectedIndex", "" + i);
         console.log("" + checked);
-        //transfer to next page;
+        this.goToMainScreen();
       }
       
     }catch(e){
@@ -71,6 +81,10 @@ export class ShelterPickComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  goToMainScreen(){
+    this.route.navigate(['/shelterPicked/home']);
   }
 
 

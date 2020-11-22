@@ -1,7 +1,7 @@
-Button {
-    border-radius: 15;
-    height: 34;
-    width: 100;
+Button{
+    border-width: 2;
+    border-color: pink;
+    border-radius: 5;
 }
 
 .parent {
@@ -19,14 +19,6 @@ Button {
     margin-right: 5;
 }
 
-.centerClass {
-}
-
-.options {
-    margin-left: 10;
-    margin-right: 10;
-}
-
 .mobileForm {
     vertical-align: middle;
     background-color: rgb(255, 202, 220);
@@ -40,11 +32,17 @@ Button {
     padding: 3;
 }
 
-Label {
+.mobileForm Label{
     vertical-align: middle;
     margin-left: 15;
     margin-right: 5;
 }
+
+/* Label {
+    vertical-align: middle;
+    margin-left: 15;
+    margin-right: 5;
+} */
 
 .input {
     border-width: 1;
@@ -91,8 +89,13 @@ Label {
     /* background-color: rgb(238, 238, 238); */
 }
 
+.options *{
+    padding-top: 5;
+    padding-bottom: 5;
+}
+
 .listpicker{
-    margin-left: 20;
+    /* margin-left: 20; */
     /* margin-right: 20;  */
     /* margin: 5;  */
     /* background-color: white; */

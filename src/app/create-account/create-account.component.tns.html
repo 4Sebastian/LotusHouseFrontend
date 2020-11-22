@@ -8,7 +8,7 @@
     </GridLayout>
     <DockLayout dock="top" class="parent2" stretchLastChild="true">
         <StackLayout class="centerClass">
-            <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto, auto" columns="auto, *" class="mobileForm">
+            <GridLayout visibility="{{ accountCreated ? 'collapsed' : 'visible' }}" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto" columns="auto, *" class="mobileForm">
                 <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center"
                     text="Create a new account:"></Label>
                 <Label row="1" col="0" verticalAlignment="center" text="Username:"></Label>
@@ -23,6 +23,9 @@
                 <TextView #token row="6" col="0" colSpan="2" hint="Enter Token Here:"></TextView>
                 <Label row="7" col="0" colSpan="2" text="{{error}}" color="red" visibility="{{ !isWrong ? 'collapsed' : 'visible' }}"></Label>
                 <Button row="8" col="0" text="Create" (tap)="create(username.text, password.text, email.text, Sheltername.text, token.text)"></Button>
+            </GridLayout>
+            <GridLayout visibility="{{ !accountCreated ? 'collapsed' : 'visible' }}" rows="auto" columns="*" class="mobileForm">
+                <Label row="0" col="0" textAlignment="center" verticalAlignment="center" textWrap="true" text="Your account has been created. Go back to the shelter selection screen and continue from there."></Label>
             </GridLayout>
         </StackLayout>
     </DockLayout>

@@ -1,1 +1,18 @@
-<Button text="options works!" class="btn btn-primary"></Button>
+<DockLayout class="parent" stretchLastChild="true" xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:dd="nativescript-drop-down">
+    <GridLayout dock="bottom" class="bottomBar" rows="auto" columns="*">
+        <Button row="0" col="0" [nsRouterLink]="['/shelterPicked/login']" textWrap="true" textAlignment="center"
+        verticalAlignment="center" text="Back to Login"></Button>
+    </GridLayout>
+    <DockLayout dock="top" class="parent2" stretchLastChild="true">
+        <StackLayout class="centerClass">
+            <Button [nsRouterLink]="['/shelterPicked/delete']" textWrap="true" textAlignment="center"
+        verticalAlignment="center" text="Delete this account"></Button>
+            <Button [nsRouterLink]="['/shelterPicked/updateUsername']" textWrap="true" textAlignment="center"
+        verticalAlignment="center" text="Change your username"></Button>
+            <Button [nsRouterLink]="['/shelterPicked/updatePassword']" textWrap="true" textAlignment="center"
+        verticalAlignment="center" text="Change your password"></Button>
+        </StackLayout>
+    </DockLayout>
+</DockLayout>
+            

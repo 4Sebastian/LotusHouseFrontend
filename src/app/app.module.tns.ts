@@ -21,6 +21,9 @@ import { CreateAccountComponent } from '@src/app/create-account/create-account.c
 import { OptionsComponent } from '@src/app/options/options.component';
 
 import { registerElement } from 'nativescript-angular/element-registry';
+import { DeleteAccountComponent } from '@src/app/delete-account/delete-account.component';
+import { UpdateUsernameComponent } from '@src/app/update-username/update-username.component';
+import { UpdatePasswordComponent } from '@src/app/update-password/update-password.component';
 registerElement("DropDown", () => require("nativescript-drop-down/drop-down").DropDown);
 
 
@@ -40,6 +43,9 @@ registerElement("DropDown", () => require("nativescript-drop-down/drop-down").Dr
     RegisterAccountComponent,
     CreateAccountComponent,
     OptionsComponent,
+    DeleteAccountComponent,
+    UpdateUsernameComponent,
+    UpdatePasswordComponent,
   ],
   imports: [
     NativeScriptFormsModule,

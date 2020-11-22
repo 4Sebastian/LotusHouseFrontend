@@ -13,9 +13,10 @@
     margin-right: 5;
 }
 
-Button {
-    border-radius: 15;
-    height: 34;
+Button{
+    border-width: 2;
+    border-color: pink;
+    border-radius: 5;
 }
 
 ScrollView {

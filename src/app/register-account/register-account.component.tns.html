@@ -6,7 +6,7 @@
     </GridLayout>
     <DockLayout dock="top" class="parent2" stretchLastChild="true">
         <StackLayout class="centerClass">
-            <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="auto, *" class="mobileForm">
+            <GridLayout visibility="{{ sentRequest ? 'collapsed' : 'visible' }}" rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="auto, *" class="mobileForm">
                 <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center" text="Register for a new account:"></Label>
                 <Label row="1" col="0" verticalAlignment="center" text="First Name:"></Label>
                 <TextField #firstname row="1" col="1" hint="Enter First Name Here:" ></TextField>
@@ -20,6 +20,9 @@
                 <TextField #Sheltername row="5" col="1" hint="Enter Shelter Name Here:"></TextField>
                 <Label row="6" col="0" colSpan="2" text="{{error}}" visibility="{{ !isWrong ? 'collapsed' : 'visible' }}" color="red"></Label>
                 <Button row="7" col="0" text="Register" (tap)="register(firstname.text, lastname.text, email.text, phoneNumber.text, Sheltername.text)"></Button>
+            </GridLayout>
+            <GridLayout visibility="{{ !sentRequest ? 'collapsed' : 'visible' }}" rows="auto" columns="*" class="mobileForm">
+                <Label row="0" col="0" textAlignment="center" verticalAlignment="center" textWrap="true" text="Your request has been sent and will be reviewed in the next 48 hours. A token will be sent to the selected email for account creation once everything has been confirmed."></Label>
             </GridLayout>
         </StackLayout>
     </DockLayout>

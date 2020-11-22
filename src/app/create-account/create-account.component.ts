@@ -11,6 +11,7 @@ export class CreateAccountComponent implements OnInit {
 
   error: String;
   isWrong = false;
+  accountCreated = false;
 
   constructor(private issueService: IssueService, private page: Page) {
     page.actionBarHidden = true;
@@ -37,7 +38,9 @@ export class CreateAccountComponent implements OnInit {
       this.isWrong = true;
     }else{
       this.isWrong = false;
+      this.accountCreated = true;
       this.sendCreateRequest(username, password, email, Sheltername, token);
+      this.accountCreated = true;
     }
   }
 
@@ -58,6 +61,7 @@ export class CreateAccountComponent implements OnInit {
       console.log(e);
       this.error = e;
       this.isWrong = true;
+      this.accountCreated = false;
     }
     
   }

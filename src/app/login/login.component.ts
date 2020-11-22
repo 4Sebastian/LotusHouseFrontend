@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { getString, setString } from '@nativescript/core/application-settings';
 import { ObservableArray } from '@nativescript/core/data/observable-array';
+import { Observable, Page } from '@nativescript/core/ui/page';
 import { IssueService } from '../issue.service';
 
 @Component({
@@ -16,20 +17,39 @@ export class LoginComponent implements OnInit {
   names: ObservableArray<String>;
   selectedShelter: Number;
   isChecked: Boolean;
+  private firstCheck = true;
 
 
-  constructor(private issueService: IssueService) {
+  constructor(private issueService: IssueService, private page: Page) {
+    var viewModel = new Observable();
+    
+    this.selectedShelter = parseInt(getString("selectedIndex", "0"));
     this.fetchNames();
-    this.selectedShelter = this.getIndex(this.issueService.getShelterName());
+
+    viewModel.set("selectedIndex", this.selectedShelter);
+ 
+    page.bindingContext = viewModel;
+    
+   }
+
+  ngOnInit() {
+    this.issueService.shareMessage.subscribe(message => this.loggedIn = message);
+    console.log(getString("defaultShelter"));
     if(getString("defaultShelter", "false") == "true"){
       this.isChecked = true;
     }else{
       this.isChecked = false;
     }
-   }
+    
+  }
 
-  ngOnInit() {
-    this.issueService.shareMessage.subscribe(message => this.loggedIn = message);
+  // async fixListPicker(){
+  //   //this.selectedShelter = parseInt(getString("selectedIndex", "0"));
+    
+  // }
+
+  async getName(){
+    this.selectedShelter = await this.getIndex(this.issueService.getShelterName());
   }
 
   async onSubmit(password: string, username: string){
@@ -71,7 +91,16 @@ export class LoginComponent implements OnInit {
   }
 
   async fetchNames(){
-    this.names = await this.issueService.getAllNames();
+    await this.issueService.getAllNames().subscribe((data: String) => { 
+      let stringOfNames = JSON.stringify(data);
+      let removedEdgeString = stringOfNames.substring(2, stringOfNames.length-2);
+      this.names = new ObservableArray(removedEdgeString.substring(10, removedEdgeString.length).split("||"));
+      console.log('Data requested ...');
+      console.log(stringOfNames);
+      this.names.pop();
+      console.log(this.names);
+      console.log(this.names.length);
+    });
   }
 
   dropDownSelectedIndexChanged(i: Number){
@@ -79,6 +108,7 @@ export class LoginComponent implements OnInit {
     if(string != "" && this.matchesOneOfNames(string)){
       this.issueService.setShelterName(encodeURI(string.toString()));
     }
+    console.log(this.issueService.getShelterName());
   }
 
   // giveName(i: Number, checked: Boolean){
@@ -116,6 +146,7 @@ export class LoginComponent implements OnInit {
   }
 
   getIndex(name: String){
+    console.log(decodeURI(name.toString()));
     const temp = decodeURI(name.toString());
     for(var i = 0; i < this.names.length; i++){
       if(temp == this.names.getItem(i)){
@@ -125,8 +156,16 @@ export class LoginComponent implements OnInit {
     return -1;
   }
 
-  onCheckedChanged(state: Boolean){
-    setString("defaultShelter", "" + state);
+  onCheckedChange($event){
+    console.log(getString("defaultShelter"));
+    if(getString("defaultShelter", "true") == "true" && !this.firstCheck){
+      setString("defaultShelter", "false");
+      console.log("now false");
+    }else{
+      setString("defaultShelter", "true");
+      console.log("now true");
+    }
+    this.firstCheck = false;
   }
 
 }
