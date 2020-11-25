@@ -66,7 +66,8 @@ export class LoginComponent implements OnInit {
       this.cnt = 1;
     }
     this.issueService.flipLoading();  
-    console.log(password + " and " + username)
+    console.log(password + " and " + username);
+    console.log(this.issueService.getShelterName());
   }
 
   isLoggedIn(){
@@ -106,7 +107,7 @@ export class LoginComponent implements OnInit {
   dropDownSelectedIndexChanged(i: Number){
     var string = this.names.getItem(Number(i));
     if(string != "" && this.matchesOneOfNames(string)){
-      this.issueService.setShelterName(encodeURI(string.toString()));
+      this.issueService.setShelterName(string.toString());
     }
     console.log(this.issueService.getShelterName());
   }

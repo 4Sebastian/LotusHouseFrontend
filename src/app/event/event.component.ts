@@ -30,14 +30,16 @@ export class EventComponent implements OnInit {
 
   constructor(private issueService: IssueService) {
     this.issueService.shareMessage.subscribe(message => this.loggedIn = message)
-    this.issueService.delay(275).then(() => {
-      this.fetchRooms();
-    });
+    // this.issueService.delay(275).then(() => {
+    //   this.fetchRooms();
+    // });
+    this.fetchRooms();
     this.issueService.shareReloading.subscribe((reloading: string) => {
       if(reloading == 'true'){
-        this.issueService.delay(275).then(() => {
-          this.fetchRooms();
-        });
+        // this.issueService.delay(275).then(() => {
+        //   this.fetchRooms();
+        // });
+        this.fetchRooms();
       }
     });
    }

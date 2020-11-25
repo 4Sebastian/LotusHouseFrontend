@@ -18,14 +18,16 @@ export class HomeComponent implements OnInit {
 
   constructor(private issueService: IssueService) {
     this.issueService.shareMessage.subscribe(message => this.loggedIn = message);
-    this.issueService.delay(275).then(() => {
-      this.fetchEvents();
-    });
+    // this.issueService.delay(275).then(() => {
+    //   this.fetchEvents();
+    // });
+    this.fetchEvents();
     this.issueService.shareReloading.subscribe((reloading: string) => {
       if(reloading == 'true'){
-        this.issueService.delay(275).then(() => {
-          this.fetchEvents();
-        });
+        // this.issueService.delay(275).then(() => {
+        //   this.fetchEvents();
+        // });
+        this.fetchEvents();
       }
     });
     

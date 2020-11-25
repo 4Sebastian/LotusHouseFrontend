@@ -54,7 +54,7 @@ export class ShelterPickComponent implements OnInit {
       var string = this.names.getItem(Number(i));
       console.log(string);
       if(string != "" && this.matchesOneOfNames(string)){
-        this.issueService.setShelterName(encodeURI(string.toString()));
+        this.issueService.setShelterName(string.toString());
         this.pickedShelter = false;
         console.log("worked");
         setString("defaultShelter", "" + checked);

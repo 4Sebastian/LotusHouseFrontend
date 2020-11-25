@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IssueService } from '../issue.service';
+import { getString, setString } from '@nativescript/core/application-settings';
+import { Page } from '@nativescript/core/ui/page';
 
 @Component({
   selector: 'app-delete-account',
@@ -12,12 +14,14 @@ export class DeleteAccountComponent implements OnInit {
   isWrong = false;
   error = "";
 
-  constructor(private issueService: IssueService) { }
+  constructor(private issueService: IssueService,private page: Page) {
+    page.actionBarHidden = true;
+   }
 
   ngOnInit(): void {
   }
 
-  delete(username: String , password: String , email: String){
+  async delete(username: String , password: String , email: String){
     if(username.length < 8){
       this.isWrong = true;
       this.error = "The username must be at least 8 characters long"
@@ -29,10 +33,21 @@ export class DeleteAccountComponent implements OnInit {
       this.error = "Please enter a valid email"
     }else{
       try{
-        this.isWrong = false;
-        this.error = "";
-        this.deletedAccount = true;
-        this.issueService.deleteAccount(username, password, email).subscribe();
+        if(await this.issueService.deleteAccount(username, password, email)){
+          this.isWrong = false;
+          this.error = "";
+          this.deletedAccount = true;
+
+        }else{
+          this.isWrong = true;
+          this.error = getString("httpError", "An Unknown Error has occurred");
+          this.deletedAccount = false;
+        }  
+        // this.issueService.deleteAccount(username, password, email).subscribe(res => {
+        //   console.log(res);
+        // }, error => {
+        //   console.log(error)
+        // });
       }catch(e){
         this.isWrong = true;
         this.error = e;

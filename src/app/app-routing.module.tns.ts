@@ -25,14 +25,14 @@ export const routes: Routes = [
     { path: 'event', component: EventComponent},
     { path: 'login', component: LoginComponent},
     { path: 'options', component: OptionsComponent },
-    { path: 'delete', component: DeleteAccountComponent },
     { path: 'updateUsername', component: UpdateUsernameComponent },
     { path: 'updatePassword', component: UpdatePasswordComponent },
     { path: 'passwordResetRequest', component: PasswordResetRequestComponent },
     { path: 'resetFinalStep', component: PasswordResetTokenUsageComponent },
   ]},
   { path: 'registerAccount', component: RegisterAccountComponent },
-  { path: 'createAccount', component: CreateAccountComponent }
+  { path: 'createAccount', component: CreateAccountComponent },
+  { path: 'delete', component: DeleteAccountComponent },
 ];
 
 @NgModule({

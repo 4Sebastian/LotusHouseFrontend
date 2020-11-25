@@ -184,29 +184,32 @@ export class IssueService {
   }
 
   //User Login Methods
-  async login(username, password){
+  async login(username: String, password: String){
     const user = {
       username: username,
-      email: null,
       hashedPassword: password,
+      shelterName: this.getShelterName(),
     }
+
     this.flipLoading();
     await this.http.post(`${this.uri}/user/login`, user).toPromise().then(data=>{
       let res = {'results': JSON.stringify(data).substring(10,JSON.stringify(data).length-2),
       'json': ()=>{return data;}
+      
     };
-      setString( "jwtKey" , res.results);
+    setString( "jwtKey" , res.results);
+    return true;
     })
     .catch(error => {
       console.log(error);
       return false;
     })
 
-    if(getString("jwtKey") == '' || getString("jwtKey") == 'User name required' || getString("jwtKey") == 'password required'){
-      console.log("did not work, token:" + getString("jwtKey"));
+    if(getString("jwtKey") == '' || getString("jwtKey") == 'User name required' || getString("jwtKey") == 'password required' || getString("jwtKey") == "shelter name required"){
+      console.log("did not work, token: " + getString("jwtKey"));
       return false;
     }else{
-      console.log("did work, token:" + getString("jwtKey"));
+      console.log("did work, token: " + getString("jwtKey"));
       return true;
     }
     //return this.http.post(`${this.uri}/user/login`, user).subscribe(async (res: Response) => this.token.next( await res.json() ));
@@ -221,7 +224,8 @@ export class IssueService {
   async passwordResetRequest(username: string, email: string){
     const user = {
       username: username,
-      email: email
+      email: email,
+      shelterName: this.getShelterName()
     }
 
     let headerToken = new HttpHeaders();
@@ -249,7 +253,8 @@ export class IssueService {
   async changePasswordWithToken(newPassword: string, resetToken: string){
     const passwordReset = {
       hashedPassword: newPassword,
-      passwordResetToken: resetToken
+      passwordResetToken: resetToken,
+      shelterName: this.getShelterName()
     }
 
     this.flipLoading();
@@ -272,17 +277,61 @@ export class IssueService {
     return getString("jwtKey");
   }
 
-  requestAccount(firstname: String, lastname: String, email: String, phoneNumber: String, shelterName: String){
+  async requestAccount(firstname: String, lastname: String, email: String, phoneNumber: String, shelterName: String){
+    var results: String;
     const user = {
       name: firstname + ", " + lastname,
       shelter: shelterName,
       email: email,
       phoneNumber: phoneNumber,
     }
-    return this.http.post(`${this.uri}/user/register`, user);
+    return await this.http.post(`${this.uri}/user/register`, user).toPromise().then(data=>{
+      let res = {'results': JSON.stringify(data),
+      'json': ()=>{return data;}};
+      results = res.results;
+      if(results.search("User name required") != -1 || results.search("shelter name required") != -1 || results.search("email required") != -1 || results.search("phone number required") != -1 || results.search("errorzzz") != -1){
+        if(results.search("User name required") != -1){
+          setString("httpError", "Please provide an username");
+        }else if(results.search("shelter name required") != -1){
+          setString("httpError", "Please provide a shelter name");
+        }else if(results.search("email required") != -1){
+          setString("httpError", "Please provide an email");
+        }else if(results.search("phone number required") != -1){
+          setString("httpError", "Please provide a phone number");
+        }else if(results.search("errorzzz") != -1){
+          setString("httpError", "An Unknown Error has occurred");
+        }
+        return false;
+      }else{
+        return true;
+      }
+    }).catch(error => {
+      let res = {'results': JSON.stringify(error),
+      'json': ()=>{return error;}};
+      results = res.results;
+      if(results.search("User name required") != -1 || results.search("shelter name required") != -1 || results.search("email required") != -1 || results.search("phone number required") != -1 || results.search("errorzzz") != -1){
+        if(results.search("User name required") != -1){
+          setString("httpError", "Please provide an username");
+        }else if(results.search("shelter name required") != -1){
+          setString("httpError", "Please provide a shelter name");
+        }else if(results.search("email required") != -1){
+          setString("httpError", "Please provide an email");
+        }else if(results.search("phone number required") != -1){
+          setString("httpError", "Please provide a phone number");
+        }else if(results.search("errorzzz") != -1){
+          setString("httpError", "An Unknown Error has occurred");
+        }
+        return false;
+      }else{
+        return true;
+      }
+    });
+
+    
   }
 
-  createAccount(username: String, password: String, email: String, Sheltername: String, token: String){
+  async createAccount(username: String, password: String, email: String, Sheltername: String, token: String){
+    var results: String;
     const user = {
       username: username,
       shelterName: Sheltername,
@@ -291,33 +340,186 @@ export class IssueService {
     }
     const header = new HttpHeaders({ "Authorization": "Bearer " + token });
 
-    return this.http.post(`${this.uri}/user/signup`, user, {headers: header });
+    return await this.http.post(`${this.uri}/user/signup`, user, {headers: header }).toPromise().then(data=>{
+      let res = {'results': JSON.stringify(data),
+      'json': ()=>{return data;}};
+      results = res.results;
+      console.log("wait what?????");
+      if(results.search("Incorrect Token") != -1 || results.search("need username and password") != -1 || results.search("The username is already taken") != -1 || results.search("The email is already taken") != -1 || results.search("The shelter name is already taken") != -1 || results.search("something is just wrong!") != -1 || results.search("Failed to create new record") != -1 || results.search("An interesting error occurred") != -1){
+        if(results.search("Incorrect Token") != -1){
+          setString("httpError", "Please check your token");
+        }else if(results.search("need username and password") != -1){
+          setString("httpError", "Please enter a username and password");
+        }else if(results.search("The username is already taken") != -1){
+          setString("httpError", "The username is already taken");
+        }else if(results.search("The email is already taken") != -1){
+          setString("httpError", "The email is already taken");
+        }else if(results.search("The shelter name is already taken") != -1){
+          setString("httpError", "The shelter name is already taken");
+        }else if(results.search("Failed to create new record") != -1){
+          setString("httpError", "An error occurred accessing the database");
+        }else {
+          setString("httpError", "An Unknown Error has occurred");
+        }
+        return false;
+      }else{
+        return true;
+      }
+    }).catch(error => {
+      let res = {'results': JSON.stringify(error),
+      'json': ()=>{return error;}};
+      results = res.results;
+      console.log("wait what?????!!!!!");
+      if(results.search("Incorrect Token") != -1 || results.search("need username and password") != -1 || results.search("The username is already taken") != -1 || results.search("The email is already taken") != -1 || results.search("The shelter name is already taken") != -1 || results.search("something is just wrong!") != -1 || results.search("Failed to create new record") != -1 || results.search("An interesting error occurred") != -1){
+        if(results.search("Incorrect Token") != -1){
+          setString("httpError", "Please check your token");
+        }else if(results.search("need username and password") != -1){
+          setString("httpError", "Please enter a username and password");
+        }else if(results.search("The username is already taken") != -1){
+          setString("httpError", "The username is already taken");
+        }else if(results.search("The email is already taken") != -1){
+          setString("httpError", "The email is already taken");
+        }else if(results.search("The shelter name is already taken") != -1){
+          setString("httpError", "The shelter name is already taken");
+        }else if(results.search("Failed to create new record") != -1){
+          setString("httpError", "An error occurred accessing the database");
+        }else {
+          setString("httpError", "An Unknown Error has occurred");
+        }
+        return false;
+      }else{
+        return true;
+      }
+    });
+
+    
   }
 
-  deleteAccount(username: String, password: String, email: String){
+  async deleteAccount(username: String, password: String, email: String){
+    var results: String;
     const deleteProfile = {
       name: username, 
       shelter: this.getShelterName(),
       email: email,
       hashedPassword: password
     }
-    return this.http.post(`${this.uri}/user/deleteAccount`, deleteProfile, this.getLoginHeader());
+    return await this.http.post(`${this.uri}/user/deleteAccount`, deleteProfile, this.getLoginHeader()).toPromise().then(data=>{
+      let res = {'results': JSON.stringify(data),
+      'json': ()=>{return data;}};
+      results = res.results;
+      if(results.search("User not deleted") != -1 || results.search("Incorrect Token") != -1){
+        if(results.search("User not deleted") != -1){
+          setString("httpError", "Please check the information provided");
+        }
+        console.log("User not deleted -> " + results.search("User not deleted"));
+        return false;
+      }else{
+        return true;
+      }
+    }).catch(error => {
+      let res = {'results': JSON.stringify(error),
+      'json': ()=>{return error;}};
+      results = res.results;
+      if(results.search("User not deleted") != -1 || results.search("Incorrect Token") != -1){
+        if(results.search("User not deleted") != -1){
+          setString("httpError", "Please check the information provided");
+        }
+        console.log("User not deleted -> " + results.search("User not deleted"));
+        return false;
+      }else{
+        return true;
+      }
+    });
+
+    
   }
   
-  updateUsername(updatedInfo: String){
+  async updateUsername(updatedInfo: String){
+    var results: String;
     const updatePackage = {
       shelter: this.getShelterName(),
       userName: updatedInfo
     }
-    return this.http.post(`${this.uri}/user/updateUser`, updatePackage, this.getLoginHeader());
+    return await this.http.post(`${this.uri}/user/updateUser`, updatePackage, this.getLoginHeader()).toPromise().then(data=>{
+      let res = {'results': JSON.stringify(data),
+      'json': ()=>{return data;}};
+      results = res.results;
+      if(results.search("Incorrect Token") != -1 || results.search("Username Taken") != -1 || results.search("Failed to update") != -1){
+        if(results.search("Incorrect Token") != -1){
+          setString("httpError", "Please login again");
+        }else if(results.search("Username Taken") != -1){
+          setString("httpError", "Please use a unique username");
+        }else if(results.search("Failed to update") != -1){
+          setString("httpError", "There was an error accessing the database");
+        }
+        return false;
+      }else{
+        return true;
+      }
+    }).catch(error => {
+      let res = {'results': JSON.stringify(error),
+      'json': ()=>{return error;}};
+      results = res.results;
+      if(results.search("Incorrect Token") != -1 || results.search("Username Taken") != -1 || results.search("Failed to update") != -1){
+        if(results.search("Incorrect Token") != -1){
+          setString("httpError", "Please login again");
+        }else if(results.search("Username Taken") != -1){
+          setString("httpError", "Please use a unique username");
+        }else if(results.search("Failed to update") != -1){
+          setString("httpError", "There was an error accessing the database");
+        }
+        return false;
+      }else{
+        return true;
+      }
+    });
+
+    
   }
 
-  updatePassword(updatedInfo: String){
+  async updatePassword(updatedInfo: String){
+    var results: String;
     const updatePackage = {
       shelter: this.getShelterName(),
-      userName: updatedInfo
+      password: updatedInfo
     }
-    return this.http.post(`${this.uri}/user/updatePassword`, updatePackage, this.getLoginHeader());
+    return await this.http.post(`${this.uri}/user/updatePassword`, updatePackage, this.getLoginHeader()).toPromise().then(data=>{
+      let res = {'results': JSON.stringify(data),
+      'json': ()=>{return data;}};
+      results = res.results;
+      if(results.search("Incorrect Token") != -1 || results.search("Password Taken") != -1 || results.search("Failed to update") != -1){
+        if(results.search("Incorrect Token") != -1){
+          setString("httpError", "Please login again");
+        }else if(results.search("Password Taken") != -1){
+          setString("httpError", "Please use a unique password");
+        }else if(results.search("Failed to update") != -1){
+          setString("httpError", "There was an error accessing the database");
+        }
+        
+        return false;
+      }else{
+        return true;
+      }
+    }).catch(error => {
+      let res = {'results': JSON.stringify(error),
+      'json': ()=>{return error;}};
+      results = res.results;
+      if(results.search("Incorrect Token") != -1 || results.search("Password Taken") != -1 || results.search("Failed to update") != -1){
+        if(results.search("Incorrect Token") != -1){
+          setString("httpError", "Please login again");
+        }else if(results.search("Password Taken") != -1){
+          setString("httpError", "Please use a unique password");
+        }else if(results.search("Failed to update") != -1){
+          setString("httpError", "There was an error accessing the database");
+        }
+        
+        return false;
+      }else{
+        return true;
+      }
+    });
+
+    
   }
 
   getAllNames(){

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IssueService } from '../issue.service';
+import { getString, setString } from '@nativescript/core/application-settings';
 
 @Component({
   selector: 'app-update-username',
@@ -17,16 +18,22 @@ export class UpdateUsernameComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  update(updatedInfo: String){
+  async update(updatedInfo: String){
     if(updatedInfo.length < 8){
       this.isWrong = true;
       this.error = "The username must be at least 8 characters long"
     }else {
-      this.isWrong = false;
-      this.error = "";
-      this.updatedUsername = true;
+      
       try{
-        this.issueService.updateUsername(updatedInfo).subscribe();
+        if(await !this.issueService.updateUsername(updatedInfo)){
+          this.isWrong = true;
+          this.error = getString("httpError", "An Unknown Error has occurred");
+          this.updatedUsername = false;
+        }else{
+          this.isWrong = false;
+          this.error = "";
+          this.updatedUsername = true;
+        }
       }catch(e){
         this.isWrong = true;
         this.error = e;

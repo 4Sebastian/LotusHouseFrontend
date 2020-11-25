@@ -36,7 +36,7 @@ export class PasswordResetTokenUsageComponent implements OnInit {
     }else{
       this.response = await this.issueService.changePasswordWithToken(newPassword, resetToken);
       if(this.response == 'Successfully reset password'){
-        await this.router.navigate(['/login'], { relativeTo: this.route });
+        await this.router.navigate(['/shelterPicked/login']);
       }
     }
   }

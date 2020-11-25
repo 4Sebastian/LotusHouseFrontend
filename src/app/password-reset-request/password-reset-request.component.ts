@@ -20,7 +20,7 @@ export class PasswordResetRequestComponent implements OnInit {
     this.response = await this.issueService.passwordResetRequest(username, email);
     if(this.response == 'Successfully sent email'){
       try{
-        console.log(await this.router.navigate(['/resetFinalStep'], { relativeTo: this.route }));
+        console.log(await this.router.navigate(['/shelterPicked/resetFinalStep']));
       }catch(error){
         console.log(error);
       }

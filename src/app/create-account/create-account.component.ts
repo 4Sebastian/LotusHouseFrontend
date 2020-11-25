@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Page } from '@nativescript/core/ui/page';
 import { IssueService } from '../issue.service';
+import { getString, setString } from '@nativescript/core/application-settings';
 
 @Component({
   selector: 'app-create-account',
@@ -20,7 +21,7 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  create(username: String, password: String, email: String, Sheltername: String, token: String){
+  async create(username: String, password: String, email: String, Sheltername: String, token: String){
     if(!this.isValidEmail(email)){
       this.error = "Please enter a valid email"
       this.isWrong = true;
@@ -37,10 +38,9 @@ export class CreateAccountComponent implements OnInit {
       this.error = "Please enter your specified token";
       this.isWrong = true;
     }else{
-      this.isWrong = false;
-      this.accountCreated = true;
-      this.sendCreateRequest(username, password, email, Sheltername, token);
-      this.accountCreated = true;
+      
+      await this.sendCreateRequest(username, password, email, Sheltername, token);
+      
     }
   }
 
@@ -56,7 +56,16 @@ export class CreateAccountComponent implements OnInit {
 
   async sendCreateRequest(username: String, password: String, email: String, Sheltername: String, token: String){
     try{
-      await this.issueService.createAccount(username, password, email, Sheltername, token).subscribe();
+      var meh = await this.issueService.createAccount(username, password, email, Sheltername, token);
+      if(!(meh)){
+        this.error = getString("httpError", "An Unknown Error has occurred");
+        this.isWrong = true;
+        this.accountCreated = false;
+      }else{
+        this.error = "";
+        this.isWrong = false;
+        this.accountCreated = true;
+      };
     }catch(e){
       console.log(e);
       this.error = e;

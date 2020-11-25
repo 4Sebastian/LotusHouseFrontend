@@ -31,7 +31,7 @@ xmlns:dd="nativescript-drop-down">
                 <Label row="0" col="0" colSpan="2" textAlignment="center" verticalAlignment="center"
                     text="Change your homeless shelter:"></Label>
                 <!-- <ListPicker #listpicker row="1" col="0" colSpan="2" [items]="names"></ListPicker> -->
-                <dd:DropDown #listpicker [items]="names" hint="select shelter" class="listpicker" selectedIndex="0" (selectedIndexChanged)="dropDownSelectedIndexChanged(listpicker.selectedIndex)" row="1" col="0"
+                <dd:DropDown #listpicker [items]="names" hint="select shelter" class="listpicker" selectedIndex="{{selectedShelter}}" (selectedIndexChanged)="dropDownSelectedIndexChanged(listpicker.selectedIndex)" row="1" col="0"
                     colSpan="2" />
                 <!-- <Label row="2" col="0" colSpan="2" visibility="{{ !pickedShelter ? 'collapsed' : 'visible' }}" textAlignment="center" verticalAlignment="center" color="red"
                 text="Please select an actual homeless shelter"></Label> -->

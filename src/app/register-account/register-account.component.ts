@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { getString } from '@nativescript/core/application-settings';
 import { Page } from '@nativescript/core/ui/page';
 import { IssueService } from '../issue.service';
 
@@ -36,8 +37,7 @@ export class RegisterAccountComponent implements OnInit {
     }else if(shelterName == ""){
       this.error = "Please enter your shelter's name";
     }else{
-      this.isWrong = false;
-      this.sentRequest = true;
+      
       this.sendRegisterRequest(firstname, lastname, email, phoneNumber, shelterName);
       
     }
@@ -55,7 +55,15 @@ export class RegisterAccountComponent implements OnInit {
 
   async sendRegisterRequest(firstname: String, lastname: String, email: String, phoneNumber: String, shelterName: String){
     try{
-      await this.issueService.requestAccount(firstname, lastname, email, phoneNumber, shelterName).subscribe();
+      if(await !this.issueService.requestAccount(firstname, lastname, email, phoneNumber, shelterName)){
+        this.isWrong = true;
+        this.sentRequest = false;
+        this.error = getString("httpError", "An Unknown Error has occurred");
+      }else{
+        this.isWrong = false;
+        this.sentRequest = true;
+        this.error = "";
+      };
     }catch(e){
       console.log(e);
       this.isWrong = true;

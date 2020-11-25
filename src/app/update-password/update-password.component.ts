@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IssueService } from '../issue.service';
+import { getString, setString } from '@nativescript/core/application-settings';
 
 @Component({
   selector: 'app-update-password',
@@ -17,16 +18,23 @@ export class UpdatePasswordComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  update(updatedInfo: String){
+  async update(updatedInfo: String){
     if(updatedInfo.length < 8){
       this.isWrong = true;
       this.error = "The password must be at least 8 characters long"
     }else {
-      this.isWrong = false;
-      this.error = "";
-      this.updatedPassword = true;
+      
       try{
-        this.issueService.updatePassword(updatedInfo).subscribe();
+
+        if(await this.issueService.updatePassword(updatedInfo)){
+          this.isWrong = false;
+          this.error = "";
+          this.updatedPassword = true;
+        }else{
+          this.isWrong = true;
+          this.error = getString("httpError", "An Unknown Error has occurred");
+          this.updatedPassword = false;
+        }
       }catch(e){
         this.isWrong = true;
         this.error = e;

@@ -14,7 +14,7 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    if(getString("selectedIndex", "needShelter") == "needShelter"){
+    
       this.issueService.getAllNames().subscribe((data: String) => { 
         let stringOfNames = JSON.stringify(data);
         let removedEdgeString = stringOfNames.substring(2, stringOfNames.length-2);
@@ -25,14 +25,29 @@ export class AppComponent {
         console.log(names);
         console.log(names.length);
         var string = names.getItem(0);
-        this.issueService.setShelterName(encodeURI(string.toString()));
+        
+        if(getString("selectedIndex", "needShelter") == "needShelter"){
+          this.issueService.setShelterName(encodeURI(string.toString()));
+        }
+        
+        if(getString("defaultShelter", "false") == "true" && this.shelterExists(names.getItem(parseInt(getString("selectedIndex"))), names)){
+          this.goToMainScreen();
+        }
+      
       });
-    }
+    
 
 
-    if(getString("defaultShelter", "false") == "true"){
-      this.goToMainScreen();
+    
+  }
+
+  shelterExists(string: String, names: ObservableArray<String>){
+    for(var i = 0; i < names.length; i++){
+      if(string == names.getItem(i)){
+        return true;
+      }
     }
+    return false;
   }
 
   goToMainScreen(){
