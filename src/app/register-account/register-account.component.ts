@@ -55,14 +55,14 @@ export class RegisterAccountComponent implements OnInit {
 
   async sendRegisterRequest(firstname: String, lastname: String, email: String, phoneNumber: String, shelterName: String){
     try{
-      if(await !this.issueService.requestAccount(firstname, lastname, email, phoneNumber, shelterName)){
-        this.isWrong = true;
-        this.sentRequest = false;
-        this.error = getString("httpError", "An Unknown Error has occurred");
-      }else{
+      if(await this.issueService.requestAccount(firstname, lastname, email, phoneNumber, shelterName)){
         this.isWrong = false;
         this.sentRequest = true;
         this.error = "";
+      }else{
+        this.isWrong = true;
+        this.sentRequest = false;
+        this.error = getString("httpError", "An Unknown Error has occurred");
       };
     }catch(e){
       console.log(e);

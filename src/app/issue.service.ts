@@ -345,7 +345,7 @@ export class IssueService {
       'json': ()=>{return data;}};
       results = res.results;
       console.log("wait what?????");
-      if(results.search("Incorrect Token") != -1 || results.search("need username and password") != -1 || results.search("The username is already taken") != -1 || results.search("The email is already taken") != -1 || results.search("The shelter name is already taken") != -1 || results.search("something is just wrong!") != -1 || results.search("Failed to create new record") != -1 || results.search("An interesting error occurred") != -1){
+      if(results.search("Incorrect Token") != -1 || results.search("need username and password") != -1 || results.search("The username is already taken") != -1 || results.search("The email is already taken") != -1 || results.search("The shelter name is already taken") != -1 || results.search("something is just wrong!") != -1 || results.search("Failed to create new record") != -1 || results.search("An interesting error occurred") != -1 || results.search("The password is already taken") != -1){
         if(results.search("Incorrect Token") != -1){
           setString("httpError", "Please check your token");
         }else if(results.search("need username and password") != -1){
@@ -358,7 +358,9 @@ export class IssueService {
           setString("httpError", "The shelter name is already taken");
         }else if(results.search("Failed to create new record") != -1){
           setString("httpError", "An error occurred accessing the database");
-        }else {
+        }else if(results.search("The password is already taken") != -1){
+          setString("httpError", "The password is already taken");
+        }else{
           setString("httpError", "An Unknown Error has occurred");
         }
         return false;
@@ -370,7 +372,7 @@ export class IssueService {
       'json': ()=>{return error;}};
       results = res.results;
       console.log("wait what?????!!!!!");
-      if(results.search("Incorrect Token") != -1 || results.search("need username and password") != -1 || results.search("The username is already taken") != -1 || results.search("The email is already taken") != -1 || results.search("The shelter name is already taken") != -1 || results.search("something is just wrong!") != -1 || results.search("Failed to create new record") != -1 || results.search("An interesting error occurred") != -1){
+      if(results.search("Incorrect Token") != -1 || results.search("need username and password") != -1 || results.search("The username is already taken") != -1 || results.search("The email is already taken") != -1 || results.search("The shelter name is already taken") != -1 || results.search("something is just wrong!") != -1 || results.search("Failed to create new record") != -1 || results.search("An interesting error occurred") != -1 || results.search("The password is already taken") != -1){
         if(results.search("Incorrect Token") != -1){
           setString("httpError", "Please check your token");
         }else if(results.search("need username and password") != -1){
@@ -383,7 +385,9 @@ export class IssueService {
           setString("httpError", "The shelter name is already taken");
         }else if(results.search("Failed to create new record") != -1){
           setString("httpError", "An error occurred accessing the database");
-        }else {
+        }else if(results.search("The password is already taken") != -1){
+          setString("httpError", "The password is already taken");
+        }else{
           setString("httpError", "An Unknown Error has occurred");
         }
         return false;

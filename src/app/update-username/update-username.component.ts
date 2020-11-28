@@ -25,14 +25,14 @@ export class UpdateUsernameComponent implements OnInit {
     }else {
       
       try{
-        if(await !this.issueService.updateUsername(updatedInfo)){
-          this.isWrong = true;
-          this.error = getString("httpError", "An Unknown Error has occurred");
-          this.updatedUsername = false;
-        }else{
+        if(await this.issueService.updateUsername(updatedInfo)){
           this.isWrong = false;
           this.error = "";
           this.updatedUsername = true;
+        }else{
+          this.isWrong = true;
+          this.error = getString("httpError", "An Unknown Error has occurred");
+          this.updatedUsername = false;
         }
       }catch(e){
         this.isWrong = true;

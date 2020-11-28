@@ -3,6 +3,7 @@ import { getString, setString } from '@nativescript/core/application-settings';
 import { ObservableArray } from '@nativescript/core/data/observable-array';
 import { Observable, Page } from '@nativescript/core/ui/page';
 import { IssueService } from '../issue.service';
+import { DropDown } from "nativescript-drop-down";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   cnt: number = 0;
 
   names: ObservableArray<String>;
-  selectedShelter: Number;
+  selectedIndex: Number;
   isChecked: Boolean;
   private firstCheck = true;
 
@@ -23,12 +24,13 @@ export class LoginComponent implements OnInit {
   constructor(private issueService: IssueService, private page: Page) {
     var viewModel = new Observable();
     
-    this.selectedShelter = parseInt(getString("selectedIndex", "0"));
+    this.selectedIndex = parseInt(getString("selectedIndex", "0"));
     this.fetchNames();
 
-    viewModel.set("selectedIndex", this.selectedShelter);
+    viewModel.set("selectedIndex", this.selectedIndex);
  
     page.bindingContext = viewModel;
+    console.log(this.selectedIndex);
     
    }
 
@@ -48,8 +50,12 @@ export class LoginComponent implements OnInit {
     
   // }
 
+  getSelectedIndex(listpicker: DropDown){
+    listpicker.selectedIndex = (Number)(this.selectedIndex);
+  }
+
   async getName(){
-    this.selectedShelter = await this.getIndex(this.issueService.getShelterName());
+    this.selectedIndex = await this.getIndex(this.issueService.getShelterName());
   }
 
   async onSubmit(password: string, username: string){
