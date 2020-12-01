@@ -22,6 +22,9 @@ export class UpdateUsernameComponent implements OnInit {
     if(updatedInfo.length < 8){
       this.isWrong = true;
       this.error = "The username must be at least 8 characters long"
+    }else if(this.isNotValidUsername(updatedInfo)){
+      this.error = "Your username can only contain letters and numbers"
+      this.isWrong = true;
     }else {
       
       try{
@@ -40,6 +43,11 @@ export class UpdateUsernameComponent implements OnInit {
         this.updatedUsername = false;
       }
     }
+  }
+
+  isNotValidUsername(fld: String){
+    var illegalChars = /\W/;
+    return illegalChars.test(fld.toString());
   }
 
   hasUpdatedAccount(){

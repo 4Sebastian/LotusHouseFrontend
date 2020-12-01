@@ -22,7 +22,10 @@ export class UpdatePasswordComponent implements OnInit {
     if(updatedInfo.length < 8){
       this.isWrong = true;
       this.error = "The password must be at least 8 characters long"
-    }else {
+    }else if(!this.isValidPassword(updatedInfo)){
+      this.isWrong = true;
+      this.error = "Please have a password between 7 to 15 characters with at least one numeric digit and a special character"
+    }else{
       
       try{
 
@@ -46,6 +49,11 @@ export class UpdatePasswordComponent implements OnInit {
 
   hasUpdatedAccount(){
     return this.updatedPassword;
+  }
+
+  isValidPassword(inputtxt: String){
+    var paswd=  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    return paswd.test(inputtxt.toString());
   }
 
 }

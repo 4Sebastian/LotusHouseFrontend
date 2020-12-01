@@ -28,9 +28,12 @@ export class CreateAccountComponent implements OnInit {
     }else if(username.length < 7){
       this.error = "Your username must be at least 8 characters long";
       this.isWrong = true;
-    }else if(password.length < 7){
-      this.error = "Your password must be at least 8 characters long";
+    }else if(this.isNotValidUsername(username)){
+      this.error = "Your username can only contain letters and numbers"
       this.isWrong = true;
+    }else if(!this.isValidPassword(password)){
+      this.isWrong = true;
+      this.error = "Please have a password between 7 to 15 characters with at least one numeric digit and a special character"
     }else if(Sheltername.length < 1){
       this.error = "Please enter you shelter's name";
       this.isWrong = true;
@@ -52,6 +55,16 @@ export class CreateAccountComponent implements OnInit {
   isValidPhoneNumber(phoneNumber: String){
     const phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
     return phoneno.test(phoneNumber.toString());
+  }
+
+  isValidPassword(inputtxt: String){
+    var paswd=  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    return paswd.test(inputtxt.toString());
+  }
+
+  isNotValidUsername(fld: String){
+    var illegalChars = /\W/;
+    return illegalChars.test(fld.toString());
   }
 
   async sendCreateRequest(username: String, password: String, email: String, Sheltername: String, token: String){

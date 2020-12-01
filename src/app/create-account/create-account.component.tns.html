@@ -21,7 +21,7 @@
                 <TextField #Sheltername row="4" col="1" hint="Enter Shelter Name Here:"></TextField>
                 <Label row="5" col="0" colSpan="2" verticalAlignment="center" text="Token:"></Label>
                 <TextView #token row="6" col="0" colSpan="2" hint="Enter Token Here:"></TextView>
-                <Label row="7" col="0" colSpan="2" text="{{error}}" color="red" visibility="{{ !isWrong ? 'collapsed' : 'visible' }}"></Label>
+                <Label row="7" col="0" colSpan="2" textWrap="true" text="{{error}}" color="red" visibility="{{ !isWrong ? 'collapsed' : 'visible' }}"></Label>
                 <Button row="8" col="0" text="Create" (tap)="create(username.text, password.text, email.text, Sheltername.text, token.text)"></Button>
             </GridLayout>
             <GridLayout visibility="{{ !accountCreated ? 'collapsed' : 'visible' }}" rows="auto" columns="*" class="mobileForm">
