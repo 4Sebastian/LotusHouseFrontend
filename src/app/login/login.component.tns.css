@@ -7,12 +7,12 @@ Button{
 .parent {
     background-color: rgb(242, 2, 138);
     /* border-color: rgb(189, 189, 189); */
-    border-radius: 15;
+    border-radius: 5;
 }
 
 .parent2 {
     background-color: rgb(255, 255, 255);
-    border-radius: 15;
+    border-radius: 5;
     margin-top: 5;
     margin-bottom: 5;
     margin-left: 5;
@@ -24,7 +24,7 @@ Button{
     background-color: rgb(255, 202, 220);
     /* border-color: rgb(173, 173, 173);
     border-width: 1; */
-    border-radius: 15;
+    border-radius: 5;
     margin-top: 5;
     margin-bottom: 5;
     margin-left: 5;
@@ -65,7 +65,7 @@ Button{
     /* border-color: rgb(173, 173, 173);
     border-width: 1; */
     width: 200;
-    border-radius: 15;
+    border-radius: 5;
     margin-top: 5;
     margin-bottom: 5;
     margin-left: 5;
@@ -87,6 +87,16 @@ Button{
     border-width: 2;
     border-radius: 5;
     /* background-color: rgb(238, 238, 238); */
+    /* vertical-align: middle;
+    background-color: rgb(255, 202, 220);
+    /* border-color: rgb(173, 173, 173);
+    border-width: 1; */
+    /* border-radius: 15;
+    margin-top: 5;
+    margin-bottom: 5;
+    margin-left: 5;
+    margin-right: 5;
+    padding: 3; */
 }
 
 .options *{

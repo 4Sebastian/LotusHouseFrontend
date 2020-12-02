@@ -112,9 +112,10 @@ export class LoginComponent implements OnInit {
 
   dropDownSelectedIndexChanged(i: Number){
     var string = this.names.getItem(Number(i));
-    if(string != "" && this.matchesOneOfNames(string)){
+    // if(string != "" && this.matchesOneOfNames(string)){
       this.issueService.setShelterName(string.toString());
-    }
+      this.selectedIndex = i;
+    // }
     console.log(this.issueService.getShelterName());
   }
 

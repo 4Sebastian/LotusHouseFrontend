@@ -129,7 +129,8 @@ export class IssueService {
       title: title,
       date: date,
       description: description,
-      shelterName: this.getCurrentURIName()
+      shelterName: this.getShelterName(),
+      formDate: this.getFakeFormDate()
     };
     this.flipLoading();
     
@@ -140,7 +141,8 @@ export class IssueService {
       name: name,
       number: number,
       events: events,
-      shelterName: this.getCurrentURIName()
+      shelterName: this.getShelterName(),
+      formDate: this.getFormDate()
     };
     this.flipLoading();
 
@@ -154,7 +156,8 @@ export class IssueService {
       title: title,
       date: date,
       description: description,
-      shelterName: this.getCurrentURIName()
+      shelterName: this.getShelterName(),
+      formDate: this.getFakeFormDate()
     };
     this.flipLoading();
 
@@ -165,7 +168,8 @@ export class IssueService {
       name: name,
       number: number,
       events: events,
-      shelterName: this.getCurrentURIName()
+      shelterName: this.getShelterName(),
+      formDate: this.getFakeFormDate()
     };
     this.flipLoading();
 

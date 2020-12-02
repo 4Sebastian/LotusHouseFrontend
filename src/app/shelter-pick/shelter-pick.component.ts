@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getString, setString } from '@nativescript/core/application-settings';
 import { ObservableArray } from '@nativescript/core/data/observable-array';
-import { Page } from '@nativescript/core/ui/page';
+import { Observable, Page } from '@nativescript/core/ui/page';
+import { DropDown } from 'nativescript-drop-down';
 import { IssueService } from '../issue.service';
 
 @Component({
@@ -16,9 +17,11 @@ export class ShelterPickComponent implements OnInit {
   pickedShelter = false;
   loading: Boolean = true;
   isChecked = true;
+  selectedIndex: Number;
 
   constructor(private page: Page, private issueService: IssueService, private route: Router) {
     page.actionBarHidden = true;
+    var viewModel = new Observable();
     
     this.fetchNames();
     console.log("calledHere");
@@ -26,6 +29,12 @@ export class ShelterPickComponent implements OnInit {
     if(getString("defaultShelter", "true") == "false"){
       this.isChecked = false;
     }
+    this.selectedIndex = parseInt(getString("selectedIndex", "0"));
+
+    viewModel.set("selectedIndex", this.selectedIndex);
+ 
+    page.bindingContext = viewModel;
+    console.log(this.selectedIndex);
   }
 
   ngOnInit(): void {
@@ -42,6 +51,10 @@ export class ShelterPickComponent implements OnInit {
       console.log(this.names);
       console.log(this.names.length);
     });
+  }
+
+  getSelectedIndex(listpicker: DropDown){
+    listpicker.selectedIndex = (Number)(this.selectedIndex);
   }
 
   giveName(i: Number, checked: Boolean){
@@ -87,7 +100,14 @@ export class ShelterPickComponent implements OnInit {
     this.route.navigate(['/shelterPicked/home']);
   }
 
-
+  dropDownSelectedIndexChanged(i: Number){
+    var string = this.names.getItem(Number(i));
+    // if(string != "" && this.matchesOneOfNames(string)){
+      this.issueService.setShelterName(string.toString());
+      this.selectedIndex = i;
+    // }
+    console.log(this.issueService.getShelterName());
+  }
 
   // spliceToNames(namesTogether: String){
   //   let tracker = 0;

@@ -7,12 +7,12 @@ https://docs.nativescript.org/angular/ui/styling
 .parent {
     background-color: rgb(242, 2, 138);
     /* border-color: rgb(189, 189, 189); */
-    border-radius: 17;
+    border-radius: 5;
 }
 
 .topBar {
     background-color: rgb(223, 223, 223);
-    border-radius: 15;
+    border-radius: 5;
     margin-top: 5;
     margin-bottom: 5;
     margin-left: 5;
@@ -27,7 +27,7 @@ Button{
 
 .ScrollView {
     background-color: rgb(255, 255, 255);
-    border-radius: 15;
+    border-radius: 5;
     margin-top: 5;
     margin-bottom: 5;
     margin-left: 5;
@@ -39,7 +39,7 @@ Button{
     /* border-color: rgb(235, 192, 207);
     border-width: 1; */
     height: auto;
-    border-radius: 15;
+    border-radius: 5;
     margin-top: 5;
     margin-bottom: 5;
     margin-left: 5;
@@ -61,7 +61,7 @@ Button{
 .eventListArea {
     background-color: rgb(255, 255, 255);
     border-color: rgb(235, 177, 197);
-    border-radius: 15;
+    border-radius: 5;
     margin-top: 5;
     margin-bottom: 5;
     margin-left: 5;
@@ -72,7 +72,7 @@ Button{
     background-color: rgb(255, 255, 255);
     border-color: rgb(235, 177, 197);
     border-width: 1;
-    border-radius: 15;
+    border-radius: 5;
     margin-top: 5;
     margin-bottom: 5;
 }
@@ -94,7 +94,7 @@ TextView {
     background-color: rgb(255, 255, 255);
     border-color: rgb(235, 177, 197);
     border-width: 1;
-    border-radius: 15;
+    border-radius: 5;
     margin-top: 5;
     margin-bottom: 5;
     margin-left: 5;

@@ -43,7 +43,7 @@ TextField, TextView{
     background: rgb(251, 251, 251);
     border-width: 1;
     border-color: pink;
-    border-radius: 3;
+    border-radius: 5;
     padding-left: 2;
     padding-right: 2;
 }
