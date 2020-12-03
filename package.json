@@ -64,7 +64,7 @@
     "typescript": "~3.7.5"
   },
   "nativescript": {
-    "id": "com.lotushouse.app",
+    "id": "com.homeforall.shelterapp",
     "tns-android": {
       "version": "6.5.3"
     }

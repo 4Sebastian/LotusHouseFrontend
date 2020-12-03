@@ -27,7 +27,7 @@ https://docs.nativescript.org/angular/ui/styling
 .parent {
     background-color: rgb(255, 255, 255);
     /* border-color: black; */
-    margin-top: 10;
+    margin-top: 25;
 }
 
 .toggle {

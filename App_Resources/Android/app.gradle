@@ -8,7 +8,7 @@
 android {  
   defaultConfig {  
     generatedDensities = []
-    applicationId = "com.lotushouse.app" 
+    applicationId = "com.homeforall.shelterapp" 
     
     //override supported platforms
     // ndk {
