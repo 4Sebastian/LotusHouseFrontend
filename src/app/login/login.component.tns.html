@@ -36,7 +36,7 @@ xmlns:dd="nativescript-drop-down">
                 <!-- <Label row="2" col="0" colSpan="2" visibility="{{ !pickedShelter ? 'collapsed' : 'visible' }}" textAlignment="center" verticalAlignment="center" color="red"
                 text="Please select an actual homeless shelter"></Label> -->
                 <Label row="2" col="0" textAlignment="center" verticalAlignment="center"
-                    text="Would you like this as your default shelter?"></Label>
+                    text="Would you like this as your default shelter?" textWrap="true"></Label>
                 <Switch #defaultSwitch row="2" col="1" [checked]="isChecked" color="pink" backgroundColor="lightgray" offBackgroundColor="gray" (checkedChange)="onCheckedChange($event)"></Switch>
             </GridLayout>
 

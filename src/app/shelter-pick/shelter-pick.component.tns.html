@@ -18,7 +18,7 @@
                 <Label row="2" col="0" colSpan="2" visibility="{{ !pickedShelter ? 'collapsed' : 'visible' }}" textAlignment="center" verticalAlignment="center" color="red"
                 text="Please select an actual homeless shelter"></Label>
                 <Label row="3" col="0" textAlignment="center" verticalAlignment="center"
-                    text="Would you like this as your default shelter?"></Label>
+                    text="Would you like this as your default shelter?" textWrap="true"></Label>
                 <Switch #defaultSwitch row="3" col="1" [checked]="isChecked" color="pink" backgroundColor="lightgray" offBackgroundColor="gray">
                 </Switch>
                 <Button row="4" col="0" colSpan="2" text="Continue" (tap)="giveName(listpicker.selectedIndex, defaultSwitch.checked)"></Button>
